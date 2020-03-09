@@ -1,0 +1,20 @@
+.btn {
+	display        : inline-flex;
+	justify-content: center;
+	align-items    : center;
+	border         : 0;
+	padding        : 0;
+
+	&.btn-view-more {
+		color        : #ffffff;
+		line-height  : 36px;
+		font-size    : 14px;
+		font-weight  : 700;
+		padding      : 0 20px;
+		border-radius: 5px;
+		// BACKROUND
+		background: rgba(238, 196, 45, 1);
+		background: linear-gradient(to bottom, rgba(238, 196, 45, 1) 0%, rgba(239, 171, 44, 1) 15%, rgba(242, 109, 43, 1) 55%, rgba(246, 49, 42, 1) 100%);
+		filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#eec42d', endColorstr='#f6312a', GradientType=0);
+	}
+}
