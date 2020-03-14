@@ -1,9 +1,11 @@
-header {
+header[data-layout="index"] {
 	position  : fixed;
 	top       : 0;
 	left      : 0;
 	width     : 100%;
+	background: #ffffff;
 	box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: .16);
+	z-index   : 999;
 
 	.logo {
 		margin-right: 17.3px;

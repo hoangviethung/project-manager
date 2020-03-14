@@ -1,0 +1,25 @@
+section.index-4
+	.container
+		.slider-customer
+			.review-image
+				.swiper-container
+					.swiper-wrapper
+						-for(i=1;i<5;i++)
+							.swiper-slide
+								figure
+									.img.ov-h(data-getHeight)
+										img.ofcv(src="./assets/images/index/index-4/customer/review-image/"+i+".png", alt="alt")
+									figcaption
+										.content(data-setHeight)
+											.quote The PMO team relies on Asana to hit our goal of reducing unit costs of the Shared Services Center year-on-year.
+											.name Tamas Kada KLM
+											.office Business Development Manager
+			.thumbnail-image
+				.swiper-container
+					.swiper-wrapper
+						-for(j=1;j<5;j++)
+							.swiper-slide
+								figure
+									.img.ov-h(data-getHeight)
+										img.ofcv(src="./assets/images/index/index-4/customer/thumbnail/"+j+".png", alt="alt")
+				.swiper-button-next.btn(data-setHeight) See more Customer

@@ -1,9 +1,16 @@
-extends _components/_layout/_layout.pug
+extends _components/_layout/_layout-index.pug
 
 block var
 	- let title = 'Project Manager';
 	- let bodyClass = 'index-page';
 
-block banner,breadcrumb
 block main
+	//BLOCK 1 TRANG CHỦ
+	include ./_components/index/i-1
+	//BLOCK 2 TRANG CHỦ
+	include ./_components/index/i-2
+	//BLOCK 3 TRANG CHỦ
+	include ./_components/index/i-3
+	//BLOCK 4 TRANG CHỦ
+	include ./_components/index/i-4
 block scripts
