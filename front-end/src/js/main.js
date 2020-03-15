@@ -63,14 +63,13 @@ const setHeightOverFolowBySomeElement = (selector) => {
 
 const marginRightThumbnailSliderCustomer = () => {
 	const width = $('.slider-customer .thumbnail-image .swiper-button-next').outerWidth();
-	console.log(width);
 	$('.slider-customer .thumbnail-image .swiper-container').css('margin-right', width + 19);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
 	Loading().then(() => {
 		// GET HEIGHT SOMWE ELEMENT
-		setHeightOverFolowBySomeElement('.thumbnail-image,.review-image');
+		setHeightOverFolowBySomeElement('.thumbnail-image,.review-image,.index-5');
 	});
 	// WOW JS
 	new WOW().init();
@@ -83,6 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('resize', () => {
-	setHeightOverFolowBySomeElement('.thumbnail-image,.review-image');
+	setHeightOverFolowBySomeElement('.thumbnail-image,.review-image,.index-5');
 	marginRightThumbnailSliderCustomer();
 })
