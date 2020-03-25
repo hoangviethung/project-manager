@@ -6,7 +6,7 @@ class Main extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->search=isset($_GET['search'])?$_GET['search']:FALSE;
-		$this->load->model('default/groupModel');
+		$this->load->model('default/group_model');
 		$this->data = array();
 	}
 	public function index()
