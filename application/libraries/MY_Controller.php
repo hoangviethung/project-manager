@@ -5,7 +5,7 @@ class MY_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('obisys');
-        $this->load->model('M_myweb');
+        $this->load->model('M_myweb','default_model');
 		$this->load->model('default/M_nguyenquan',"m_nguyenquan");
 		$this->systemDefault();
 		$exception_uris = array('dashboard/logout','dashboard/login','index','');

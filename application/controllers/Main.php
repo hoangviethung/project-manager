@@ -37,30 +37,42 @@ class Main extends MY_Controller {
 		$this->data['subview'] 	= 'default/index/V_index';
 		$this->load->view('default/_main_page',$this->data);
 	}
-	public function search()
+	
+	public function registerView()
 	{
-		if($this->search)
-		{
-			$search=explode(" ",$this->search);
-			if(count($search)<2){
-				$this->data['title']="Tìm Kiếm";
-				$this->data['error']="Vui lòng nhập nhiều hơn 1 từ";
-				$this->data['subview'] 	= 'default/search/V_search';
-				$this->load->view('default/_main_page',$this->data);
-			}
-			else{
-				$this->data['title']="Tìm Kiếm";
-				$this->data['search']=$this->m_nguyenquan->getSearchData($this->search);
-				$this->data['subview'] 	= 'default/search/V_search';
-				$this->load->view('default/_main_page',$this->data);
-			}
-
-		}
-		else
-		{
-			redirect(site_url());
-		}
+		$this->data['title']	= "Trang Chủ";
+		$this->data['subview'] 	= 'default/register/V_index';
+		$this->load->view('default/_main_page',$this->data);
 	}
 
-	
+	public function registerSave()
+	{
+		$registerData = $this->input->post();
+		if($registerData)
+		{
+			$registerData['email'] = encodeEmail($registerData['email']);
+			$registerData['password'] = hashPass($registerData['password']);
+			$userId = $this->default_model->sets($registerData)->save();
+			if($userId){
+				$session = array(
+					'id'			=>	$userId,
+					'logged_in'		=>	true,
+					'userName'		=>	$registerData['user_name'],
+					'displayName'	=>	$registerData['display_name'],
+					'email'			=>	$registerData['email'],
+					'avatar'		=>	'no-avatar.png',
+					'token'			=>	randomString(30)
+				);
+				$_SESSION['system'] = (object)$session;
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$registerData['user_name']);
+				return redirect(site_url('dashboard'));
+			}else{
+				$_SESSION['system_msg'] = messageDialog('div', 'error', 'Có lỗi khi tạo tài khoản');
+				return redirect(site_url("register"));
+			}
+		}else{
+			$_SESSION['system_msg'] = messageDialog('div', 'error', 'Vui lòng nhập các trường cần thiết (*)');
+			return redirect(site_url("register"));
+		}
+	}
 }
