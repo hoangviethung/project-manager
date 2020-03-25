@@ -1,0 +1,79 @@
+#chooseImgFile{
+	height: 250px;
+	width: 250px;
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+img#imgFile{cursor: pointer;max-width:100px;max-height:100px;}
+img.imgFile{height:auto;;max-width: 100%;}
+.img-fluid{
+	width:100%;
+	height:auto;
+}
+.category-item-wrap:hover{
+	background:#d6f5f3;
+}
+tr:hover{
+	background:rgb(243, 243, 243);
+}
+
+.chart-container {
+	position: relative;
+	margin: auto;
+	height: 80vh;
+	width: 70vw;
+}
+.product-report-item{
+	border-radius:4px;
+	border:solid 1px rgb(204, 204, 204);
+	margin-top:10px;	
+}
+.product-report-wrap{
+	margin:0 25px;
+	text-align:right;
+}
+.product-report-icon{
+	float:left;
+	padding:30px;
+	height:100px;
+	width:100px;
+	border-radius:10px;
+	font-size: 3.5rem;
+}
+.bg-success{
+	background:#28a745 ;
+	color:white;
+}
+.bg-danger{
+	background:#dc3545;
+	color:white;
+}
+.product-report-title{
+	color:grey;
+	font-size: 1.7rem;
+}
+.product-report-info
+{
+	font-size: 2.5rem;
+	font-weight: 600;
+}
+.chart_tab{
+	display:flex;
+	justify-content: center;
+}
+.chart_tab li{
+	flex:30%;
+	text-align:center;
+}
+.chart_tab li a{
+	text-decoration:none;
+	color:black!important;
+}
+
+.chart_tab li.active a,.chart_tab li.active a:focus{
+	color:white!important;
+	background:#3da5eb;
+}
+

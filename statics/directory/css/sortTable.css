@@ -1,0 +1,119 @@
+/* Scrollable Content Height */
+.scrollContent {
+ height:100px;
+ overflow-x:hidden;
+ overflow-y:auto;
+}
+
+.scrollContent tr {
+ height: auto;
+ white-space: nowrap;
+}
+
+/* Prevent Mozilla scrollbar from hiding right-most cell content */
+.scrollContent tr td:last-child {
+ padding-right: 20px;
+}
+
+.scrollContent tr td:not(:first-child) {
+ padding-left: 10px;
+}
+
+/*
+.scrollContent tr td:not(:first-child):not(:last-child) {
+ padding-right: 10px;
+} */
+
+/* Fixed Header Height */
+.fixedHeader tr {
+ position: relative;
+ height: auto;
+ /* this fixes IE header jumping bug when mousing over rows in the tbody */
+ top: expression( this.parentNode.parentNode.parentNode.scrollTop + 'px' );
+}
+
+/* Put border around entire table */
+div.TableContainer {
+ /* border: 1px solid #A87D7D; */
+ overflow-y:auto;
+}
+
+/* Table Header formatting */
+.headerFormat {
+ background-color: white;
+ color: #FFFFFF;
+ margin: 3px;
+ padding: 1px;
+ white-space: nowrap;
+ font-family: Helvetica;
+ font-size: 18px;
+ text-decoration: none;
+ font-weight: bold;
+}
+.headerFormat tr td {
+ border: 1px solid #000000;
+ background-color: #A87D7D;
+}
+
+/* Table Body (Scrollable Content) formatting */
+.bodyFormat tr td {
+	color: #000000;
+	margin: 3px;
+	padding: 1px;
+	border: 0px none;
+	font-family: Helvetica;
+	font-size: 14px;
+}
+
+/* Use to set different color for alternating rows */
+.alternateRow {
+  background-color: #F1E0E0;
+}
+
+/* Styles used for SORTING */
+.point {
+ cursor:pointer;
+}
+
+td.sortedColumn {
+  background-color: #F1E0E0;
+}
+
+tr.alternateRow td.sortedColumn {
+  background-color: #e5c5c5;
+}
+
+.total {
+	background-color: #D3FE62;
+	color: #000000;
+	white-space: nowrap;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+table.scrollTable tr:hover {
+	background-color: #e5c5c5;
+	color: #660000;
+	font-style: normal;
+	/* font-weight: bold; */
+	/* text-decoration: underline overline; */
+}
+
+.hoverMe {
+	background-color: #e5c5c5;
+	color: #660000;
+	font-style: normal;
+	/* font-weight: bold; */
+	/* text-decoration: underline overline; */
+}
+
+<!--[if IE]>
+<style type="text/css">
+  /* IE Specific Style addition to constrain table from automatically growing in height */
+  div.TableContainer {
+   height: 121px; 
+   overflow-x:auto;
+   overflow-y:auto;
+  }
+</style>
+<![endif]-->
