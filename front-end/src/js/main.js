@@ -10,7 +10,7 @@ const checkLayoutBanner = () => {
 const sliderCustomer = () => {
 	var thumbnail = new Swiper('.slider-customer .thumbnail-image .swiper-container', {
 		spaceBetween: 10,
-		slidesPerView: 4,
+		slidesPerView: 1,
 		loop: true,
 		observer: true,
 		observeParents: true,
@@ -24,6 +24,14 @@ const sliderCustomer = () => {
 			nextEl: '.thumbnail-image .swiper-button-next',
 			prevEl: '.thumbnail-image .swiper-button-prev',
 		},
+		breakpoints: {
+			768: {
+				slidesPerView: 2,
+			},
+			1440: {
+				slidesPerView: 4,
+			}
+		}
 	});
 
 	var review = new Swiper('.slider-customer .review-image .swiper-container', {

@@ -2,9 +2,11 @@
 	margin: 50px 0;
 
 	.block-item {
-		max-width: 960px;
-		width    : 100%;
-		margin   : 0 auto;
+		position    : relative;
+		max-width   : 960px;
+		width       : 100%;
+		margin-right: auto;
+		margin-left : auto;
 	}
 
 	.list-item {
@@ -31,6 +33,49 @@
 			p {
 				color      : #646F79;
 				font-weight: 300;
+			}
+		}
+	}
+
+	@media (max-width: 1024.98px) {
+		.block-item {
+			padding-right: 10px;
+			padding-left : 10px;
+		}
+
+		.list-item {
+			margin-right: -10px;
+			margin-left : -10px;
+
+			.item {
+				padding-left : 10px;
+				padding-right: 10px;
+			}
+		}
+	}
+
+	@media (max-width: 767.98px) {
+		margin: 25px 0;
+
+		.list-item {
+			.item {
+				-ms-flex        : 0 0 100%;
+				-webkit-box-flex: 0;
+				flex            : 0 0 100%;
+				max-width       : 100%;
+				margin-bottom   : 20px;
+
+				h3 {
+					font-size: 18px;
+				}
+
+				p {
+					font-size: 14px;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
