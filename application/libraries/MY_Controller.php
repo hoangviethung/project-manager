@@ -5,7 +5,7 @@ class MY_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('obisys');
-        $this->load->model('M_myweb','default_model');
+        $this->load->model('M_myweb');
 		$this->load->model('default/M_nguyenquan',"m_nguyenquan");
 		$this->systemDefault();
 		$exception_uris = array('dashboard/logout','dashboard/login','index','');
@@ -41,5 +41,50 @@ class MY_Controller extends CI_Controller {
 			return false;
 		}
 		return (int) $id;
+	}
+	public function send_email($emailData)
+	{
+		if($emailData && !empty($emailData))
+		{
+			$message = $emailData['content'];
+			$subject = $emailData['subject'];
+			$receiver = $emailData['receiver'];
+			$config = Array(
+				
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.gmail.com',
+				'smtp_port' => '465',
+				'smtp_user' => '', // change email account it to yours
+				'smtp_pass' => '', // change password it to yours
+				'mailtype' => 'html',
+				'charset' => 'utf-8',
+				'newline' => "\r\n",
+				'wordwrap' => TRUE
+			);
+			
+			// load email library
+			$this->load->library('email',$config);
+
+			// prepare email
+			$this->email
+				->from('', '') // Params: $senderEmail, $senderName
+				->to("$receiver")
+				->subject($subject)
+				->message($message)
+				->set_mailtype('html');
+				// ->set_newline("\r\n");
+
+        // send email
+			if (!$this->email->send())
+			{	
+				$result['error_message'] = $this->email->print_debugger();
+				$result['date_time'] = now();
+				$result['receiver'] = $receiver;
+				$this->M_myweb->set_table('email')->sets($result)->setPrimary(0)->save();//Save email error to db
+				return false;
+			}else{
+				return true;
+			}
+		}
 	}
 }
