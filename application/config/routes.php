@@ -53,12 +53,16 @@ $route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//default
+//Default
 $route['admin'] = 'cms/main';
 $route['dashboard/login'] = 'auth';
-$route['dashoard/logout'] = 'auth/logout';
+$route['dashboard/logout'] = 'auth/logout';
 $route['dashboard/(:any)'] = 'cms/$1';
-$route['dashboard'] = 'main/dashBoard';
+$route['dashboard'] = 'dashboard';
+
+//Register
+$route['register'] = 'main/registerView';
+$route['register_save'] = 'main/registerSave';
 
 
 // $route['product'] = 'default/product';

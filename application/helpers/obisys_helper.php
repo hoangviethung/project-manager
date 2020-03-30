@@ -1,6 +1,6 @@
 <?php
 
-function hashpass($string) {
+function hashPass($string) {
 	return hash('sha1', $string . config_item('encryption_key'));
 }
 
