@@ -1,0 +1,79 @@
+.main__inner
+	.card(data-max-width="850")
+		.card__header
+			.card__header-title
+				h3 Task Duo Soon
+			.card__header-actions
+				a.link(href="#") See all my tasks
+		.card__body
+			.btn.bth-create.w-100 Create new task
+			.block-list-favories
+				.title Favories
+				.list-item
+					// ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS
+					.item
+						.icon-projects(data-width="120" data-height="120" data-bg="#EA4E9D")
+						.name Project 1
+					.item
+						.icon-projects(data-width="120" data-height="120" data-bg="#00FF6C")
+						.name Project 2
+					.item
+						.icon-projects(data-width="120" data-height="120" data-bg="#F5FF00")
+						.name Project 3
+			.block-list-recent
+				.title Recent Projects
+				.list-item
+					// ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS
+					.item
+						.icon-projects(data-width="40" data-height="40" data-bg="#EA4E9D")
+						.text
+							.name Project 1
+							.history Visited Today
+						.list-user.ml-at
+							// USER CÓ ẢNH
+							.user
+								.avatar.ov-h
+									img.ofcv(src="./assets/images/admin/user-default.png", alt="")
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							.add-user(data-fancybox data-src="#block-invite") Invite +
+					.item
+						.icon-projects(data-width="40" data-height="40" data-bg="#00FF6C")
+						.text
+							.name Project 2
+							.history Visited Today
+						.list-user.ml-at
+							// USER CÓ ẢNH
+							.user
+								.avatar.ov-h
+									img.ofcv(src="./assets/images/admin/user-default.png", alt="")
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							.add-user(data-fancybox data-src="#block-invite") Invite +
+					.item
+						.icon-projects(data-width="40" data-height="40" data-bg="#F5FF00")
+						.text
+							.name Project 3
+							.history Visited Today
+						.list-user.ml-at
+							// USER CÓ ẢNH
+							.user
+								.avatar.ov-h
+									img.ofcv(src="./assets/images/admin/user-default.png", alt="")
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							// USER TRỐNG
+							.user
+								.avatar.ov-h
+							.add-user(data-fancybox data-src="#block-invite") Invite +
+					.item(data-type="add-news-item")
+						.btn.btn-add-new-project New Project

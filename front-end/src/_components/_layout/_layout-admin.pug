@@ -11,7 +11,7 @@ html(lang="en")
 		link(href="https://fonts.googleapis.com/css?family=Baloo+2:400,500,600,700,800&display=swap&subset=devanagari,latin-ext,vietnamese" rel="stylesheet")
 		link(rel="stylesheet", href="./css/core.min.css")
 		link(rel="stylesheet", href="./css/main.min.css")
-	body
+	body(data-layout="admin")
 		#loading
 			.logo-loader
 				img(src="./assets/loading.gif")
@@ -27,6 +27,21 @@ html(lang="en")
 		main
 			block main
 			#js-page-verify(class=bodyClass hidden)
+		// BLOCK FORMS LOGIN - CLICK SEND AJAX (res.Code = 200 -> True, != 200 -> False)
+		.d-n
+			#block-invite(data-max-width="580")
+				h2 Invite people to this Project
+				p Your teammates will get an email that gives them access to your team.
+				.block-form
+					form(action="#")
+						.form-group
+							label#email Email Address
+							textarea#email(name="email" placeholder="name@company.com, name@company.com......")
+						.form-group
+							label#project Choose a starting project
+							input#project(type="text" name="project" placeholder="Star typing to add a project")
+						.form-group.ta-r
+							button.btn.btn-send-invite(data-url="link-ajax") Send
 		script(type="text/javascript", src="./js/core.min.js")
 		script(type="text/javascript", src="./js/main.min.js")
 		block scripts

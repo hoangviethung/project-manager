@@ -11,7 +11,7 @@ html(lang="en")
 		link(href="https://fonts.googleapis.com/css?family=Baloo+2:400,500,600,700,800&display=swap&subset=devanagari,latin-ext,vietnamese" rel="stylesheet")
 		link(rel="stylesheet", href="./css/core.min.css")
 		link(rel="stylesheet", href="./css/main.min.css")
-	body
+	body(data-layout="index")
 		#loading
 			.logo-loader
 				img(src="./assets/loading.gif")
@@ -26,6 +26,22 @@ html(lang="en")
 			#js-page-verify(class=bodyClass hidden)
 		block footer
 			include _footer-index
+		// BLOCK FORMS LOGIN - CLICK SEND AJAX (res.Code = 200 -> True, != 200 -> False)
+		.d-n
+			#block-login(data-max-width="900")
+				h2 Log in
+				a(href="#").btn.btn-login-google.d-b.w-100.ta-c Use Google Account
+				.or.ta-c or
+				.block-form
+					form(action="#")
+						.form-group
+							label Email Address
+							input(type="text" name="email" placeholder="name@company.com")
+						.form-group
+							label Password
+							input(type="password" name="password" placeholder="Password")
+						.form-group
+							button.btn.btn-view-more.w-100(data-redirect="/link-redirect" data-url="link-ajax") Login
 		script(type="text/javascript", src="./js/core.min.js")
 		script(type="text/javascript", src="./js/main.min.js")
 		block scripts

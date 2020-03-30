@@ -1,0 +1,55 @@
+aside
+	.block-logo
+		.logo-src
+			a(href="index.html")
+				img(src="./assets/logo.svg", alt="", srcset="")
+		.button-close
+			span.line
+	// ASIDE MENU FE ĐÃ VIẾT JS ĐỂ ADD CLASS -> TỐI ĐA ĐƯỢC 3 CẤP MENU -> (LIST LINK, LNIK, LIST LINK)
+	.aside-list
+		.aside-item
+			.name
+				.icon
+					img.svg(src="./assets/icons/menu.svg", alt="", srcset="")
+				h5.lcl.lcl-1 Menu
+			ul.list-link
+				li.link
+					a(href="user-admin.html") Home
+				li.link
+					a(href="role-admin.html") My Task
+				li.link
+					a(href="role-admin.html") Inbox
+				li.link
+					a(href="role-admin.html") Portfolios
+		.aside-item
+			.name
+				.icon
+					img.svg(src="./assets/icons/favorites.svg", alt="", srcset="")
+				h5.lcl.lcl-1 Favorites
+			//DANH DÁCH CÁC DỰ ÁN YÊU THÍCH -> MÀU DẤM CHẤM TỪNG DỰ ÁN ĐƯỢC SET VÀO ATTR => DATA BG AFTER COLOR
+			ul.list-link.list-link-favorites
+				li.link
+					a(data-bg-after-color="green" href="role-admin.html") Project 1
+				li.link
+					a(data-bg-after-color="red" href="role-admin.html") Project 2
+				li.link
+					a(data-bg-after-color="yellow" href="role-admin.html") Project 3
+				li.link
+					a(data-bg-after-color="pink" href="role-admin.html") Project 4
+		.aside-item
+			.name.active
+				.icon
+					img.svg(src="./assets/icons/group-user.svg", alt="", srcset="")
+				h5.lcl.lcl-1 Project Team
+			.list-link.list-user
+				// USER CÓ ẢNH
+				.user
+					.avatar.ov-h
+						img.ofcv(src="./assets/images/admin/user-default.png", alt="")
+				// USER TRỐNG
+				.user
+					.avatar.ov-h
+				// USER TRỐNG
+				.user
+					.avatar.ov-h
+				.add-user(data-fancybox data-src="#block-invite") Invite +
