@@ -7,20 +7,20 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link href="https://fonts.googleapis.com/css?family=Baloo+2:400,500,600,700,800&amp;display=swap&amp;subset=devanagari,latin-ext,vietnamese" rel="stylesheet">
 		<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/core.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/main.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/style.css">
+    	<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/main.min.css">
+    	<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/bootstrap/bootstrap.min.css">
+    	<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/style.css">
 	</head>
-	<body>
+	<body data-layout="index">
 		<div id="loading">
-			<div class="logo-loader"><img src="<?php echo base_url('statics/default/');?>assets/loading.gif"></div>
+			<div class="logo-loader"><img src="<?php echo base_url('assets/');?>loading.gif"></div>
 			<div class="progstat-wrapper">Loading:<span id="progstat">0</span>%</div>
 			<div id="progress"></div>
 		</div>
 		<header data-layout="index">
 			<div class="container">
 				<div class="row no-gutters ai-c">
-					<div class="logo"><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/logo.svg" alt="" srcset=""></a></div>
+					<div class="logo"><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>logo.svg" alt="" srcset=""></a></div>
 					<div class="nav-list">
 						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
 						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
@@ -29,7 +29,7 @@
 					</div>
 					<div class="nav-list ml-at">
 						<div class="nav-item"><a class="nav-link" href="#">Contact Sales</a></div>
-						<div class="nav-item"><a class="nav-link" href="<?php echo site_url('dashboard/login');?>">LOG IN</a></div>
+						<div class="nav-item"><a class="nav-link" data-fancybox data-src="#block-login">LOG IN</a></div>
 						<div class="nav-item"><a class="btn btn-view-more" href="#">Try for free</a></div>
 					</div>
 				</div>
@@ -39,9 +39,11 @@
 			<!--BLOCK 1 TRANG CHỦ-->
 			<section class="index-1">
 				<div class="container">
-					<h1 class="wow fadeInDown" data-wow-delay=".2s">Make more time for the work that matters most</h1>
-					<p class="wow fadeInUp" data-wow-delay=".2s">Asana is the work management platform teams use to stay focused on the goals, projects, and daily tasks that grow business.</p>
-					<div class="ta-c mt-10px"><a class="btn btn-view-more" href="#">Try for free</a></div>
+					<div class="content">
+						<h1 class="wow fadeInDown" data-wow-delay=".2s">Make more time for the work that matters most</h1>
+						<p class="wow fadeInUp" data-wow-delay=".2s">Asana is the work management platform teams use to stay focused on the goals, projects, and daily tasks that grow business.</p>
+						<div class="ta-c mt-10px"><a class="btn btn-view-more" href="#">Try for free</a></div>
+					</div>
 				</div>
 			</section>
 			<!--BLOCK 2 TRANG CHỦ-->
@@ -75,8 +77,8 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="block-img">
-								<div class="img ov-h isVideo"><a data-fancybox href="https://vimeo.com/252476724"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/images/index/index-3/block-video.png" alt="ẢNH ĐẠI DIỆN VIDEO"></a></div>
-								<div class="girl wow rotateInDownRight" data-wow-delay=".5s"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/images/index/index-3/girl.png" alt="ẢNH CÔ GÁI BÊN VIDEO"></div>
+								<div class="img ov-h isVideo"><a data-fancybox href="https://vimeo.com/252476724"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>images/index/index-3/block-video.png" alt="ẢNH ĐẠI DIỆN VIDEO"></a></div>
+								<div class="girl wow rotateInDownRight" data-wow-delay=".5s"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>images/index/index-3/girl.png" alt="ẢNH CÔ GÁI BÊN VIDEO"></div>
 							</div>
 						</div>
 					</div>
@@ -91,7 +93,7 @@
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/review-image/1.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/review-image/1.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
 											<figcaption>
 												<div class="content" data-setHeight>
 													<div class="quote">The PMO team relies on Asana to hit our goal of reducing unit costs of the Shared Services Center year-on-year.</div>
@@ -103,7 +105,7 @@
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/review-image/2.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/review-image/2.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
 											<figcaption>
 												<div class="content" data-setHeight>
 													<div class="quote">The PMO team relies on Asana to hit our goal of reducing unit costs of the Shared Services Center year-on-year.</div>
@@ -115,7 +117,7 @@
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/review-image/3.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/review-image/3.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
 											<figcaption>
 												<div class="content" data-setHeight>
 													<div class="quote">The PMO team relies on Asana to hit our goal of reducing unit costs of the Shared Services Center year-on-year.</div>
@@ -127,7 +129,7 @@
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/review-image/4.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/review-image/4.png" alt="HÌNH ẢNH LỚN CỦA KHÁCH HÀNG"></div>
 											<figcaption>
 												<div class="content" data-setHeight>
 													<div class="quote">The PMO team relies on Asana to hit our goal of reducing unit costs of the Shared Services Center year-on-year.</div>
@@ -145,22 +147,22 @@
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/thumbnail/1.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/thumbnail/1.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
 										</figure>
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/thumbnail/2.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/thumbnail/2.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
 										</figure>
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/thumbnail/3.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/thumbnail/3.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
 										</figure>
 									</div>
 									<div class="swiper-slide">
 										<figure>
-											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('statics/default/');?>assets/images/index/index-4/customer/thumbnail/4.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
+											<div class="img ov-h" data-getHeight><img class="ofcv" src="<?php echo base_url('assets/');?>images/index/index-4/customer/thumbnail/4.png" alt="HÌNH ẢNH LOGO CÔNG TY CỦA KHÁCH HÀNG"></div>
 										</figure>
 									</div>
 								</div>
@@ -175,10 +177,10 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-6 wow flipInX" data-wow-delay=".2s">
-							<div class="img ov-h" data-getHeight><img src="<?php echo base_url('statics/default/');?>assets/images/index/index-5/item-left.png" alt="HÌNH ẢNH MINH HỌA CHỨC NĂNG CỦA WEBSITE"></div>
+							<div class="img ov-h" data-getHeight><img src="<?php echo base_url('assets/');?>images/index/index-5/item-left.png" alt="HÌNH ẢNH MINH HỌA CHỨC NĂNG CỦA WEBSITE"></div>
 						</div>
 						<div class="col-lg-6 as-c">
-							<div class="content" data-setHeight><span>NEW AND NOTEWORTHY</span>
+							<div class="content" data-setHeight="768"><span>NEW AND NOTEWORTHY</span>
 								<h2>Introducing Automation</h2>
 								<p>Don’t waste time on tedious manual tasks. Let Automation do it for you. Simplify workflows, reduce errors, and save time for solving more important problems.</p><a class="link" href="#">Learn about Automation</a>
 							</div>
@@ -191,7 +193,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="img ov-h" data-getHeight><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/images/index/index-6/item-left.png" alt="HÌNH ẢNH MINH HỌA CHỨC NĂNG CỦA WEBSITE"></div>
+							<div class="img ov-h" data-getHeight><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>images/index/index-6/item-left.png" alt="HÌNH ẢNH MINH HỌA CHỨC NĂNG CỦA WEBSITE"></div>
 						</div>
 						<div class="col-lg-6 as-c wow flipInX" data-wow-delay=".2s">
 							<div class="content" data-setHeight>
@@ -205,9 +207,11 @@
 			<!--BLOCK 7 TRANG CHỦ-->
 			<section class="index-7">
 				<div class="container">
-					<h2 class="wow fadeInDown" data-wow-delay=".2s">Get better work done</h2>
-					<p class="wow fadeInUp" data-wow-delay=".2s">See why millions of people across 195 countries use Asana.</p>
-					<div class="ta-c mt-10px"><a class="btn btn-view-more" href="#">Try for free</a></div>
+					<div class="content">
+						<h2 class="wow fadeInDown" data-wow-delay=".2s">Get better work done</h2>
+						<p class="wow fadeInUp" data-wow-delay=".2s">See why millions of people across 195 countries use Asana.</p>
+						<div class="ta-c mt-10px"><a class="btn btn-view-more" href="#">Try for free</a></div>
+					</div>
 				</div>
 			</section>
 			<div class="index-page" id="js-page-verify" hidden></div>
@@ -215,8 +219,73 @@
 		<footer>
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="logo text-center"><a href="index.html"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/logo.svg" alt="" srcset=""></a></div>
+					<div class="col-lg-2">
+						<div class="logo"><a href="index.html"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>logo.svg" alt="" srcset=""></a></div>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -228,20 +297,42 @@
 					<div class="terms-privacy"><a href="#">Terms & Privacy</a></div>
 					<div class="social-media">
 						<ul>
-							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/icons/twitter.svg" alt="" srcset=""></a></li>
-							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/icons/facebook.svg" alt="" srcset=""></a></li>
+							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>icons/twitter.svg" alt="" srcset=""></a></li>
+							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>icons/facebook.svg" alt="" srcset=""></a></li>
 						</ul>
 					</div>
 					<div class="list-download">
 						<ul>
-							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/icons/app-store.svg" alt="" srcset=""></a></li>
-							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('statics/default/');?>assets/icons/google-play.svg" alt="" srcset=""></a></li>
+							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>icons/app-store.svg" alt="" srcset=""></a></li>
+							<li><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>icons/google-play.svg" alt="" srcset=""></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</section>
+		<!-- BLOCK FORMS LOGIN - CLICK SEND AJAX (res.Code = 200 -> True, != 200 -> False)-->
+		<div class="d-n">
+			<div id="block-login" data-max-width="900">
+				<h2>Log in</h2><a class="btn btn-login-google d-b w-100 ta-c" href="#">Use Google Account</a>
+				<div class="or ta-c">or</div>
+				<div class="block-form">
+					<form action="#">
+						<div class="form-group">
+							<label>Email Address</label>
+							<input type="text" name="email" placeholder="name@company.com">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" name="password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<button class="btn btn-view-more w-100" data-redirect="<?php echo site_url('dashboard');?>" data-url="<?php echo site_url('auth/login');?>">Login</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript" src="<?php echo base_url('statics/default/');?>js/core.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url('statics/default/');?>js/main.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url('statics/default/');?>js/main.js"></script>
 	</body>
 </html>

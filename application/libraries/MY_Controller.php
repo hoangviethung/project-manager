@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
 		$exception_uris = array('dashboard/logout','dashboard/login','index','');
 		if (in_array(uri_string(), $exception_uris) == FALSE) {
 			if (check_logged_in() == FALSE) {
-				redirect('dashboard/login');
+				redirect(site_url());
 			}else{
 				if($this->data['cslug'] != ''){
 					$token = isset($_GET['token'])?$_GET['token']:"";

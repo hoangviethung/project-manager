@@ -1,5 +1,5 @@
 <?php
-$this->load->view('default/_layout/header');
+$this->load->view('dashboard/_layout/header');
 $this->load->view($subview);
-$this->load->view('default/_layout/footer');
+$this->load->view('dashboard/_layout/footer');
 ?>

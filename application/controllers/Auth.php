@@ -21,12 +21,12 @@ class Auth extends CI_Controller {
 
 	public function logout(){
 		unset($_SESSION['system']);
-		return redirect(site_url("dashboard/login"));
+		return redirect(site_url(""));
 	}
 
 	public function login(){
 		$data = $this->input->post();
-		$get = $this->M_myweb->set('user_name',$data['user_name'])->set('password',$data['password'])->set_table('user')->get();
+		$get = $this->M_myweb->set('email',$data['email'])->set('password',$data['password'])->set_table('user')->get();
 		if($get){
 			$session = array(
 				'id'			=> $get->id,
@@ -38,11 +38,9 @@ class Auth extends CI_Controller {
 				'token'			=>	randomString(30)
 			);
 			$_SESSION['system'] = (object)$session;
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$get->userName);
-			return redirect(site_url('dashboard/main'));
+			echo "200";
 		}else{
-			$_SESSION['system_msg'] = messageDialog('div', 'error', 'Tên đăng nhập hoặc tài khoản không chính xác');
-						return redirect(site_url("dashboard/login"));
+			echo "Sai Email Hoặc Password";
 		}
 	}
 }
