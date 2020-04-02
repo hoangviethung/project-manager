@@ -46,6 +46,7 @@ class Project_model extends CI_model
 		$this->db->where('project.is_active',1);
 		$this->db->where('project.id',$id);
 		$this->db->join('user','user.id = project.leader');
+		$this->db->order_by('project.last_update','desc');
 		$result= $this->db->get('project')->row();
 		if($result)
 		{
@@ -71,6 +72,19 @@ class Project_model extends CI_model
 		return false;
 	}
 
+	public function get_recent_projects_by_user($userId)
+	{
+		$this->db->where('project.is_active',1);
+		$this->db->join('project_detail','project_detail.project_id = project.id');
+		$this->db->where('project_detail.user_id',$userId);
+		$this->db->order_by('project.last_update','desc');
+		$result= $this->db->get('project')->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
 	protected function where_condition($condition)
 	{
 		foreach($condition as $key=>$value)

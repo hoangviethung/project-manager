@@ -19,22 +19,22 @@
 			<div class="header-right">
 				<div class="accounts">
 					<div class="avatar-header item-click-dropdown">
-						<figure class="ov-h"><img class="ofcv" src="<?php echo base_url('assets/');?>images/admin/user-default.png" alt="" srcset=""></figure>
+						<figure class="ov-h"><img class="ofcv" src="<?php echo base_url('assets/');?>images/admin/<?php echo !empty($infoLog->avatar)?$infoLog->data:"user-default.png";?>" alt="" srcset=""></figure>
 					</div>
 					<div class="basic-info-accounts">
-						<div class="name">Administrator</div>
+						<div class="name"><?php echo $infoLog->userName;?></div>
 						<div class="position">Quản trị viên</div>
 					</div>
 					<div class="detail-info-accounts content-dropdown">
 						<div class="header-image">
 							<div class="avatar-header">
-								<figure class="ov-h"><img class="ofcv" src="<?php echo base_url('assets/');?>images/admin/user-default.png" alt="" srcset=""></figure>
-							</div>
+								<figure class="ov-h"><img class="ofcv" src="<?php echo base_url('assets/');?>images/admin/<?php echo !empty($infoLog->avatar)?$infoLog->data:"user-default.png";?>" alt="" srcset=""></figure>
+							</div>	
 							<div class="basic-info-accounts">
-								<div class="name">Administrator</div>
+								<div class="name"><?php echo $infoLog->userName;?></div>
 								<div class="position">Quản trị viên</div>
 							</div>
-							<div class="logout"><a class="btn btn-logout" href="#">Logout</a></div>
+							<div class="logout"><a class="btn btn-logout" href="<?php echo site_url('dashboard/logout');?>">Logout</a></div>
 						</div>
 						<div class="list-link">
 							<div class="name-list">TÀI KHOẢN</div>
@@ -51,3 +51,5 @@
         </header>
         <?php $this->load->view('dashboard/_layout/asidemenu')?>
         <main>
+		<div class="main__inner">
+				<div class="card" data-max-width="850">

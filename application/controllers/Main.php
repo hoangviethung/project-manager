@@ -31,7 +31,7 @@ class Main extends MY_Controller {
 		{
 			$registerData['email'] = encodeEmail($registerData['email']);
 			$registerData['password'] = hashPass($registerData['password']);
-			$userId = $this->default_model->sets($registerData)->save();
+			$userId = $this->default_model->set_table('user')->sets($registerData)->save();
 			if($userId){
 				$session = array(
 					'id'			=>	$userId,
