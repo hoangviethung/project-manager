@@ -66,9 +66,20 @@ class Group extends MY_Controller {
         $newGroupData = $this->input->post();
 		if($newGroupData)
 		{
-            $newGroupData['leader'] = $this->userInfo->id;
+			$newGroupData['leader'] = $this->userInfo->id;
 			$newGroupId = $this->default_model->set_table('group')->sets($newGroupData)->save();
-			if($newGroupId){
+			if($newGroupId)
+			{
+				$newGroupUserData = array(
+					'group_id'	=>	$newGroupId,
+					'user_id'	=>	$this->userInfo->id,
+					'is_lead'	=>	1,
+					'date_added'=>	getCurrentMySqlDate(),
+					'is_confirmed'=>	1,
+					'token'	=>	0,
+					'date_confirmed'	=>getCurrentMySqlDate()
+				);
+				$newGroupUserId = $this->default_model->set_table('group_detail')->sets($newGroupUserData)->save();
 				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$newGroupData['user_name']);
 				return redirect(site_url('dashboard/group?id='.$newGroupId.'&token='.$this->userInfo->token));
 			}else{

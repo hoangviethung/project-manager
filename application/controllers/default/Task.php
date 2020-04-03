@@ -30,7 +30,6 @@ class Task extends MY_Controller {
 	{
         if($this->id)
         {
-            $this->data['users'] = $this->task->get_by_id($this->id);
             $this->data['title']	= "Trang Chủ";
             $this->data['subview'] = 'dashboard/group/V_index';
             $this->load->view('dashboard/_main_page',$this->data);
