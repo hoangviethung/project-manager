@@ -59,6 +59,7 @@ $route['dashboard/login'] = 'auth';
 $route['dashboard/logout'] = 'auth/logout';
 $route['dashboard/(:any)'] = 'cms/$1';
 $route['dashboard'] = 'dashboard';
+$route['confirm_group_invite'] = 'main/confirm_group_invite';
 
 //Register
 $route['register'] = 'main/registerView';

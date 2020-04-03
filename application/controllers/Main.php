@@ -54,4 +54,23 @@ class Main extends MY_Controller {
 			return redirect(site_url("register"));
 		}
 	}
+
+	public function confirm_group_invite()
+	{
+		$data = $this->input->get();
+		$confirmData = $this->default_model->set('user_id',$data['uid'])->set('token',$data['token'])->set_table('group_detail')->get();
+		if($confirmData)
+		{
+			$newMemberData = array(
+				'date_confirmed' =>	getCurrentMySqlDate(),
+				'is_confirmed'	=>	1
+			);
+			$confirmed = $this->default_model->set_table('group_detail')->sets($newMemberData)->setPrimary($confirmData->id)->save();
+			if($confirmed)
+			{
+				$this->data['title']	= "Trang Chủ";
+				$this->load->view('default/index/V_group_confirm');
+			}
+		}
+	}
 }

@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->helper('obisys');
         $this->load->model('M_myweb','default_model');
 		$this->systemDefault();
-		$exception_uris = array('dashboard/logout','dashboard/login','index','');
+		$exception_uris = array('dashboard/logout','dashboard/login','index','','confirm_group_invite');
 		if (in_array(uri_string(), $exception_uris) == FALSE) {
 			if (check_logged_in() == FALSE) {
 				redirect(site_url());
@@ -77,7 +77,7 @@ class MY_Controller extends CI_Controller {
 			if (!$this->email->send())
 			{	
 				$result['error_message'] = $this->email->print_debugger();
-				$result['date_time'] = now();
+				$result['date_time'] = getCurrentMySqlDate();
 				$result['receiver'] = $receiver;
 				$this->M_myweb->set_table('email')->sets($result)->setPrimary(0)->save();//Save email error to db
 				return false;

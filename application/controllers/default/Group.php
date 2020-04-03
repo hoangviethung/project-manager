@@ -9,8 +9,25 @@ class Group extends MY_Controller {
 		$this->load->model('default/Group_model','group');
 		$this->load->model('default/Project_model','project');
 		$this->load->model('default/Task_model','task');
+		$this->load->model('default/User_model','user');
         $this->data = array();
-        $this->id = $this->checkId($_GET['id']);
+		$this->id = $this->checkId($_GET['id']);
+		if($this->id)
+		{
+			$this->data['users'] = $this->user->get_users_by_group($this->id);
+			$this->data['projects'] = $this->project->get_projects(array('group_id'=>$this->id));
+			foreach($this->data['projects'] as $project)
+			{
+				$tasks = $this->task->get_tasks(array('project_id'=>$project->id));
+				if($tasks)
+				{
+					foreach($tasks as $task)
+					{
+						$this->data['tasks'][] = $task;
+					}
+				}
+			}
+		}
     }
     
     public function index()
@@ -53,12 +70,42 @@ class Group extends MY_Controller {
 			$newGroupId = $this->default_model->set_table('group')->sets($newGroupData)->save();
 			if($newGroupId){
 				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$newGroupData['user_name']);
-				return redirect(site_url('dashboard/group?id='.$newGroupId.'token='.$this->userInfo->token));
+				return redirect(site_url('dashboard/group?id='.$newGroupId.'&token='.$this->userInfo->token));
 			}else{
-				echo 'Có lỗi khi tạo tài khoản';
+				echo 'Có lỗi khi tạo nhóm';
 			}
 		}else{
 			echo 'Vui lòng nhập các trường cần thiết (*)';
 		}
-    }
+	}
+	
+	public function invite_member()
+	{
+		if($this->id)
+		{
+			$memberEmail = $this->input->post('email');
+			if($memberEmail)
+			{
+				$get = $this->user->get_user(array('email'=>$memberEmail));
+				if($get)
+				{
+					$newMember = array(
+						'group_id' 		=> 	$this->id,
+						'user_id'  		=> 	$get->id,
+						'date_added'	=>	getCurrentMySqlDate(),
+						'token'			=>	randomString(30)
+					);
+					$newMemberSave = $this->default_model->set_table('group_detail')->sets($newMember)->save();
+					if($newMemberSave)
+					{
+						$emailData = array();
+						$emailData['content'] = 'Vui lòng xác nhận lời mời bằng link bên dưới: '.site_url('confirm_group_invite?uid='.$get->id.'&token='.$newMember['token']);
+						$this->send_email($emailData);
+					}
+				}
+			}else{
+				echo 'Vui lòng nhập email';
+			}
+		}
+	}
 }

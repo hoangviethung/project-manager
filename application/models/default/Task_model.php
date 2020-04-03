@@ -29,6 +29,7 @@ class Task_model extends CI_model
 		$this->db->where('task.is_active',1);
 		$this->db->join('task_category','task_category.id = task.category_id');
 		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->order_by('task.last_update','desc');
 		if($where)
 		{
 			$this->where_condition($where);

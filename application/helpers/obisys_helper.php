@@ -84,6 +84,10 @@ function friendlyUrl($str){
 		return strtolower($str);
 }
 
+function getCurrentMySqlDate(){
+	return date("Y-m-d H:i:s");
+}
+
 function stripUnicode($str){
 	if(!$str) return false;
 	$unicode = array(

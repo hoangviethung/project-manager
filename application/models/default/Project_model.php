@@ -28,6 +28,7 @@ class Project_model extends CI_model
 		$this->db->select("project.*,user.user_name,user.email,user.display_name,user.avatar");
 		$this->db->where('project.is_active',1);
 		$this->db->join('user','user.id = project.leader');
+		$this->db->order_by('project.last_update','desc');
 		if($where)
 		{
 			$this->where_condition($where);
