@@ -48,10 +48,9 @@ class Project extends MY_Controller
 
 	public function new_task_save()
 	{
-
 		$newTaskData = $this->input->post();
 		if ($newTaskData) {
-			$newTaskData['project_id'] = $this->project_id;
+			$newTaskData['project_id'] = $this->id;
 			$newTaskData['assigner'] = $this->userInfo->id;
 			if (!$newTaskData['report_to']) {
 				$newTaskData['report_to'] = $this->userInfo->id;
@@ -64,6 +63,7 @@ class Project extends MY_Controller
 			$newTaskData['last_update'] = getCurrentMySqlDate();
 			$newTaskId = $this->default_model->set_table('task')->sets($newTaskData)->save();
 			if ($newTaskId) {
+				$this->default_model->set_table('project')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
 				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Tạo thành công, ' . $newTaskData['user_name']);
 				return redirect(site_url('dashboard/task?id=' . $newTaskId . 'token=' . $this->userInfo->token));
 			} else {
@@ -95,7 +95,6 @@ class Project extends MY_Controller
 	
 	public function add_member()
 	{
-
 		$memberId = $this->input->post('member_id');
 		if ($memberId) {
 			foreach ($memberId as $id) {
@@ -107,6 +106,7 @@ class Project extends MY_Controller
 				);
 				$newMemberSave = $this->default_model->set_table('project_detail')->sets($newMemberData)->save();
 			}
+			$this->default_model->set_table('project')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
 		}
 		redirect(site_url("dashboard/project?id=" . $this->id . "&token=" . $this->userInfo->token));
 	}
