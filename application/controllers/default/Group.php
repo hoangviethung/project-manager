@@ -59,7 +59,43 @@ class Group extends MY_Controller {
     public function new_group_view()
     {
 
-    }
+	}
+	
+	public function new_project_save()
+    {
+		if($this->id)
+		{
+			$newProjectData = $this->input->post();
+			if($newProjectData)
+			{
+				$newProjectData['group_id'] = $this->group_id;
+				$newProjectData['created_by'] = $this->userInfo->id;
+				if(!$newProjectData['leader'])
+				{
+					$newProjectData['leader'] = $this->userInfo->id;
+				}
+				$newProjectData['last_update'] = getCurrentMySqlDate();
+				$newProjectId = $this->default_model->set_table('project')->sets($newProjectData)->save();
+				if($newProjectId){
+					$newProjectUserData = array(
+						'project_id'	=>	$newProjectId,
+						'user_id'	=>	$this->userInfo->id,
+						'is_lead'	=>	1,
+						'date_added'=>	getCurrentMySqlDate()
+					);
+					$newProjectUserId = $this->default_model->set_table('project_detail')->sets($newProjectUserData)->save();
+					$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$newProjectData['user_name']);
+					return redirect(site_url('dashboard/group?id='.$newProjectId.'token='.$this->userInfo->token));
+				}else{
+					echo 'Có lỗi khi tạo nhóm';
+				}
+			}else{
+				echo 'Vui lòng nhập các trường cần thiết (*)';
+			}
+		}else{
+			echo 'Có lỗi khi tạo nhóm';
+		}
+	}
 
     public function new_group_save()
     {
