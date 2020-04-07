@@ -59,7 +59,7 @@ class Task extends MY_Controller
 
 	public function change_task_done()
 	{
-		$taskData['status'] = 2;
+		$taskData['status'] = getTaskStatus('Done');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -72,7 +72,7 @@ class Task extends MY_Controller
 
 	public function change_task_not_done()
 	{
-		$taskData['status'] = 1;
+		$taskData['status'] = getTaskStatus('Working On');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -85,7 +85,7 @@ class Task extends MY_Controller
 
 	public function confirm_task()
 	{
-		$taskData['status'] = 3;
+		$taskData['status'] = getTaskStatus('Confirmed');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -117,6 +117,10 @@ class Task extends MY_Controller
 			$commentData['created_by'] = $this->userInfo->id;
 			$commentData['created_at'] = getCurrentMySqlDate();
 			$newCommentId = $this->default_model->set_table('task_comment')->sets($commentData)->setPrimary(false)->save();
+			if($newCommentId)
+			{
+				$this->default_model->set_table('task')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
+			}
 			if (isset($_FILES['image']['tmp_name']) && $newCommentId) {
 				$result = $this->save_comment_file($_FILES['image'],$newCommentId);
 			}else{

@@ -1,6 +1,6 @@
 <aside>
 			<div class="block-logo">
-				<div class="logo-src"><a href="index.html"><img src="<?php echo base_url('assets/');?>logo.svg" alt="" srcset=""></a></div>
+				<div class="logo-src"><a href="<?php echo site_url('dashboard');?>"><img src="<?php echo base_url('assets/');?>logo.svg" alt="" srcset=""></a></div>
 				<div class="button-close"><span class="line"></span></div>
 			</div>
 			<!-- ASIDE MENU FE ĐÃ VIẾT JS ĐỂ ADD CLASS -> TỐI ĐA ĐƯỢC 3 CẤP MENU -> (LIST LINK, LNIK, LIST LINK)-->
@@ -12,7 +12,7 @@
 					</div>
 					<ul class="list-link">
 						<li class="link"><a href="user-admin.html">Home</a></li>
-						<li class="link"><a href="role-admin.html">My Task</a></li>
+						<li class="link <?php echo uri_string() == 'dashboard/task'?'active':'';?>"><a href="<?php echo site_url('dashboard/task');?>">My Task</a></li>
 						<li class="link"><a href="role-admin.html">Inbox</a></li>
 						<li class="link"><a href="role-admin.html">Portfolios</a></li>
 					</ul>

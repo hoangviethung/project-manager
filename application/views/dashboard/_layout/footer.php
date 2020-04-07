@@ -25,6 +25,7 @@
 </div>
 <script type="text/javascript" src="<?php echo base_url('statics/default/'); ?>js/core.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('statics/default/'); ?>js/main.min.js"></script>
+<?php $this->load->view('dashboard/_layout/scripts');?>
 </body>
 
 </html>

@@ -57,7 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'cms/main';
 $route['dashboard/login'] = 'auth';
 $route['dashboard/logout'] = 'auth/logout';
-$route['dashboard/(:any)'] = 'cms/$1';
+$route['dashboard/(:any)'] = 'dashboard/$1';
 $route['dashboard'] = 'dashboard';
 $route['confirm_group_invite'] = 'main/confirm_group_invite';
 

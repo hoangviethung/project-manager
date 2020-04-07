@@ -101,6 +101,38 @@ class Task_model extends CI_model
 		return false;
 	}
 
+	public function get_recent_tasks_by_assignee($userId)
+	{
+		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->where('task.is_active',1);
+		$this->db->join('task_category','task_category.id = task.category_id');
+		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->where('task.assignee',$userId);
+		$this->db->order_by('task.last_update','desc');
+		$result= $this->db->get('task')->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
+	public function get_recent_tasks_by_report_to($userId)
+	{
+		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->where('task.is_active',1);
+		$this->db->join('task_category','task_category.id = task.category_id');
+		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->or_where('task.report_to',$userId);
+		$this->db->order_by('task.last_update','desc');
+		$result= $this->db->get('task')->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
 	protected function where_condition($condition)
 	{
 		foreach($condition as $key=>$value)

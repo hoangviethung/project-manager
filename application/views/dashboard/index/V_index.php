@@ -2,7 +2,7 @@
     <div class="card__header-title">
         <h3>Overview</h3>
     </div>
-    <div class="card__header-actions"><a class="link" href="#">See all my tasks</a></div>
+    <div class="card__header-actions"><a class="link" href="<?php echo site_url('dashboard/task');?>">See all my tasks</a></div>
 </div>
 <div class="card__body">
     <!-- <div class="btn bth-create w-100 mb-2">Create new task</div> -->
