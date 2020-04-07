@@ -85,7 +85,7 @@ class Group extends MY_Controller {
 					);
 					$newProjectUserId = $this->default_model->set_table('project_detail')->sets($newProjectUserData)->save();
 					$this->default_model->set_table('group')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
-					$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$newProjectData['user_name']);
+					$_SESSION['system_msg'] = messageDialog('div', 'success', 'Save thành công, ');
 					return redirect(site_url('dashboard/group?id='.$newProjectId.'token='.$this->userInfo->token));
 				}else{
 					echo 'Có lỗi khi tạo nhóm';

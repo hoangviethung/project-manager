@@ -14,6 +14,7 @@ class Task extends MY_Controller
 		$this->data = array();
 		$this->id = $this->checkId($_GET['id']);
 		$this->project_id = $this->checkId($_GET['project_id']);
+		$this->data['taskStatus'] = getTaskStatusList();
 	}
 
 	public function index()
@@ -46,20 +47,14 @@ class Task extends MY_Controller
 
 	public function home()
 	{
-
 		$this->data['title']	= "Trang Chủ";
 		$this->data['subview'] = 'dashboard/group/V_index';
 		$this->load->view('dashboard/_main_page', $this->data);
 	}
 
-	public function new_group_view()
-	{
-	}
-
-
 	public function change_task_done()
 	{
-		$taskData['status'] = getTaskStatus('Done');
+		$taskData['status'] = getTaskStatusId('Done');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -72,7 +67,7 @@ class Task extends MY_Controller
 
 	public function change_task_not_done()
 	{
-		$taskData['status'] = getTaskStatus('Working On');
+		$taskData['status'] = getTaskStatusId('Working On');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -85,7 +80,7 @@ class Task extends MY_Controller
 
 	public function confirm_task()
 	{
-		$taskData['status'] = getTaskStatus('Confirmed');
+		$taskData['status'] = getTaskStatusId('Confirmed');
 		$taskData['last_update'] = getCurrentMySqlDate();
 		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
 		if ($taskId) {
@@ -109,6 +104,19 @@ class Task extends MY_Controller
 		}
 	}
 
+	public function reopen_task()
+	{
+		$taskData['status'] = getTaskStatusId('Working On');
+		$taskData['last_update'] = getCurrentMySqlDate();
+		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+		if ($taskId) {
+			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Save thành công task số ' . $taskId);
+			return redirect(site_url('dashboard/task?id=' . $taskId . 'token=' . $this->userInfo->token));
+		} else {
+			echo 'Có lỗi khi Save';
+		}
+	}
+	
 	public function new_comment_save()
 	{
 		$commentData = $this->input->post();

@@ -86,6 +86,30 @@ class Project_model extends CI_model
 		}
 		return false;
 	}
+
+	public function get_project_category($projectId)
+	{
+		$this->db->join('task_category','task_category.id = task_category_group.category');
+		$this->db->where('task_category_group.project_id',$projectId);
+		$result= $this->db->get('task_category_group')->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
+	public function delete_old_category($projectId)
+	{
+		$this->db->where('project_id', $projectId);
+		$this->db->delete('task_category_group');
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	protected function where_condition($condition)
 	{
 		foreach($condition as $key=>$value)

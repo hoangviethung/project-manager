@@ -221,7 +221,7 @@ function do_upload($dir, $file)
 		return $filename;
 	}
 
-	function getTaskStatus($status)
+	function getTaskStatusId($status)
 	{
 		switch ($status) {
 			case "New":
@@ -238,5 +238,15 @@ function do_upload($dir, $file)
 				break;
 		}
 		return $status;
+	}
+
+	function getTaskStatusList()
+	{
+		return array(
+			0 => "New",
+			1 => "Working On",
+			2 => "Done",
+			3 => "Confirmed"
+		);
 	}
 }
