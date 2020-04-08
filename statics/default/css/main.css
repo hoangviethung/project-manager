@@ -2229,37 +2229,37 @@ template {
 }
 
 
-#block-invite , #block-new-group {
+#block-invite-group , #block-new-group {
     border-radius: 10px;
     padding: 30px;
     width: 100%
 }
 
-#block-invite p, #block-new-group h2,
-#block-invite h2, #block-new-group p {
+#block-invite-group p, #block-new-group h2,
+#block-invite-group h2, #block-new-group p {
     color: #646f79
 }
 
-#block-invite h2, #block-new-group h2 {
+#block-invite-group h2, #block-new-group h2 {
     border-bottom: 1px solid #dad9d9;
     padding-bottom: 15px;
     font-size: 18px
 }
 
-#block-invite p, #block-new-group p {
+#block-invite-group p, #block-new-group p {
     margin-top: 10px;
     font-size: 14px
 }
 
-#block-invite .block-form, #block-new-group .block-form {
+#block-invite-group .block-form, #block-new-group .block-form {
     margin-top: 25px
 }
 
-#block-invite .form-group, #block-new-group .form-group {
+#block-invite-group .form-group, #block-new-group .form-group {
     margin-bottom: 15px
 }
 
-#block-invite .form-group label, #block-new-group .form-group label {
+#block-invite-group .form-group label, #block-new-group .form-group label {
     margin-bottom: 12px;
     width: 100%;
     color: #646f79;
@@ -2267,7 +2267,7 @@ template {
     font-weight: 700
 }
 
-#block-invite .form-group textarea, #block-new-group .form-group textarea {
+#block-invite-group .form-group textarea, #block-new-group .form-group textarea {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;
@@ -2277,7 +2277,7 @@ template {
     font-size: 10px
 }
 
-#block-invite .form-group input, #block-new-group .form-group input {
+#block-invite-group .form-group input, #block-new-group .form-group input {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;

@@ -204,7 +204,7 @@
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
                     a = $('#block-new-group .block-form input[name="name"]').val(),
-                    n = $('#block-new-group .block-form input[name="description"]').val();
+                    n = $('#block-new-group .block-form texarea[name="description"]').val();
                 $.ajax({
                     type: "POST",
                     url: t,
@@ -217,20 +217,20 @@
                         '200' == e.code ? (alert('Tạo thành công nhóm: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
-            })), $("#block-invite button").on("click", (function(e) {
+            })), $("#block-invite-group button").on("click", (function(e) {
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
-                    i = $("#block-invite .block-form textarea#email").val(),
-                    a = $("#block-invite .block-form input#project").val();
+                    i = $("#block-invite-group .block-form input#email").val(),
+                    a = $("#block-invite-group .block-form input#project").val();
                 $.ajax({
                     type: "POST",
                     url: t,
                     data: {
                         email: i,
-                        project: a
                     },
                     success: function(e) {
-                        200 === e.Code ? (alert(e.Messege), $.fancybox.close()) : alert(e.Messege)
+                        e = JSON.parse(e)
+                        alert(e.message)
                     }
                 })
             })), $(".item-click-dropdown").on("click", (function() {

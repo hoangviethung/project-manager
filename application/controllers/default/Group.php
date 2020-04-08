@@ -41,6 +41,9 @@ class Group extends MY_Controller
 			case "group_detail":
 				$this->group_detail();
 				break;
+			case "invite_member":
+				$this->invite_member();
+				break;
 			default:
 				$this->home();
 				break;
@@ -62,6 +65,7 @@ class Group extends MY_Controller
 			$this->data['projects'] = $this->project->get_by_id($this->id);
 			$this->data['title']	= "Trang Chủ";
 			$this->data['subview'] = 'dashboard/group/V_detail';
+			$this->data['announcements'] = $this->default_model->set_table('group_announcement')->sets(array('is_active'=>1,'group_id'=>$this->id))->gets();
 			$this->load->view('dashboard/_main_page', $this->data);
 		} else {
 			redirect(site_url('dashboard'));
@@ -158,15 +162,26 @@ class Group extends MY_Controller
 					$newMemberSave = $this->default_model->set_table('group_detail')->sets($newMember)->save();
 					if ($newMemberSave) {
 						$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
-						$emailData = array();
-						$emailData['content'] = 'Vui lòng xác nhận lời mời bằng link bên dưới: ' . site_url('confirm_group_invite?uid=' . $get->id . '&token=' . $newMember['token']);
-						$this->send_email($emailData);
+						// $emailData = array();
+						// $emailData['content'] = 'Vui lòng xác nhận lời mời bằng link bên dưới: ' . site_url('confirm_group_invite?uid=' . $get->id . '&token=' . $newMember['token']);
+						// $this->send_email($emailData);
 					}
+					$result = array(
+						'message'=>'Đã gửi mail cho thành viên'
+					);
+				}else{
+					$result = array(
+						'message'=>'Thành viên ko tồn tại'
+					);
 				}
 			} else {
-				echo 'Vui lòng nhập email';
+				$result = array(
+					'message'=>'Vui lòng nhập email'
+				);
+
 			}
 		}
+		echo json_encode($result);
 	}
 
 	public function new_announcement_save()
