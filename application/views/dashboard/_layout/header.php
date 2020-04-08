@@ -8,7 +8,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Baloo+2:400,500,600,700,800&amp;display=swap&amp;subset=devanagari,latin-ext,vietnamese" rel="stylesheet">
 		<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/core.min.css">
 		<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/main.css">
+
 		<link rel="stylesheet" href="<?php echo base_url('statics/default/');?>css/style.css">
+		
 	</head>
 	<body data-layout="admin">
 		<div id="loading">

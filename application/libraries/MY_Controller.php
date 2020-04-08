@@ -5,7 +5,10 @@ class MY_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('obisys');
-        $this->load->model('M_myweb','default_model');
+		$this->load->model('M_myweb','default_model');
+		$this->load->model('default/Group_model','group');
+		$this->load->model('default/Project_model','project');
+		$this->load->model('default/Task_model','task');
 		$this->systemDefault();
 		$exception_uris = array('dashboard/logout','dashboard/login','index','','confirm_group_invite');
 		if (in_array(uri_string(), $exception_uris) == FALSE) {
@@ -18,6 +21,11 @@ class MY_Controller extends CI_Controller {
 				}
 			}
 		}
+		if(isset($this->data['infoLog']->id))
+		{
+			$this->data['groups'] = $this->group->get_groups_by_user($this->data['infoLog']->id);
+		}
+		
 	}
 	private function systemDefault(){
 		$this->act = isset($_GET['act'])?$_GET['act']:'';

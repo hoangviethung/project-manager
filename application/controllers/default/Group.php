@@ -16,6 +16,7 @@ class Group extends MY_Controller
 			$this->id = $this->checkId($_GET['id']);
 		}
 		if ($this->id) {
+			$this->data['group'] = $this->group->get_by_id($this->id);
 			$this->data['users'] = $this->user->get_users_by_group($this->id);
 			$this->data['projects'] = $this->project->get_projects(array('group_id' => $this->id));
 			if ($this->data['projects']) {
@@ -37,6 +38,9 @@ class Group extends MY_Controller
 			case "new_group_save":
 				$this->new_group_save();
 				break;
+			case "group_detail":
+				$this->group_detail();
+				break;
 			default:
 				$this->home();
 				break;
@@ -45,17 +49,25 @@ class Group extends MY_Controller
 
 	public function home()
 	{
+
+		$this->data['title']	= "Trang Chủ";
+		$this->data['subview'] = 'dashboard/group/V_group_index';
+		$this->load->view('dashboard/_main_page', $this->data);
+	}
+
+	public function group_detail()
+	{
 		if ($this->id) {
 			$this->data['tasks'] = $this->task->get_by_id($this->id);
 			$this->data['projects'] = $this->project->get_by_id($this->id);
 			$this->data['title']	= "Trang Chủ";
-			$this->data['subview'] = 'dashboard/group/V_index';
+			$this->data['subview'] = 'dashboard/group/V_detail';
 			$this->load->view('dashboard/_main_page', $this->data);
 		} else {
-			redirect(site_url("dashboard"));
+			redirect(site_url('dashboard'));
 		}
 	}
-
+	
 	public function new_group_view()
 	{
 	}
@@ -115,8 +127,11 @@ class Group extends MY_Controller
 						'date_confirmed'	=> getCurrentMySqlDate()
 					);
 					$newGroupUserId = $this->default_model->set_table('group_detail')->sets($newGroupUserData)->save();
-					$result = array("link" => site_url('dashboard/group?id=' . $newGroupId . '&token=' . $this->data['infoLog']->token),
-					'code' => 200);
+					$result = array(
+						"link" => site_url('dashboard/group?id=' . $newGroupId . '&token=' . $this->data['infoLog']->token),
+						'code' => 200,
+						'groupName' =>	$newGroupData['name']
+					);
 				} else {
 					$result = array("message" => "Có Lỗi Khi Tạo Nhóm");
 				}

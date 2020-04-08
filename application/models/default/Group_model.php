@@ -60,6 +60,7 @@ class Group_model extends CI_model
 		$this->db->where('group.is_active',1);
 		$this->db->join('group_detail','group_detail.group_id = group.id');
 		$this->db->where('group_detail.user_id',$userId);
+		$this->db->order_by("group.last_update","desc");
 		if($where)
 		{
 			$this->where_condition($where);

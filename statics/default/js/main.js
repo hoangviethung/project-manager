@@ -214,7 +214,7 @@
                     },
                     success: function (e) {
                         e = JSON.parse(e)
-                        '200' == e.code ? ($.fancybox.close(), window.location.href = e.link) : alert(e.message)
+                        '200' == e.code ? (alert('Tạo thành công nhóm: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-invite button").on("click", (function(e) {

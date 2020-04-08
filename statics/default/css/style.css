@@ -5,3 +5,7 @@ aside .aside-list .aside-item .list-link .link.active > a {
     background-color: rgba(255,201,139,.5);
     text-decoration: none;
 }
+.nav-link{
+    color: #4eabff;
+font-size: 15px;
+}

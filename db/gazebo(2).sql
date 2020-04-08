@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2020 at 10:41 AM
+-- Generation Time: Apr 08, 2020 at 06:03 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -18,9 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `gazebo`
---
 
 -- --------------------------------------------------------
 
@@ -28,6 +25,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `group`
 --
 
+DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -37,12 +35,32 @@ CREATE TABLE `group` (
   `last_update` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `group`
+--
+
+INSERT INTO `group` (`id`, `name`, `description`, `leader`, `is_active`, `last_update`) VALUES
+(1, 'Nhóm 1', NULL, 1, 1, '2020-04-08 10:06:09'),
+(2, 'Nhóm 1', NULL, 1, 1, '2020-04-08 10:07:12'),
+(3, 'Nhóm 3', NULL, 1, 1, '2020-04-08 10:09:55'),
+(4, 'Nhóm 4', NULL, 1, 1, '2020-04-08 10:11:39'),
+(5, '', NULL, 1, 1, '2020-04-08 10:30:49'),
+(6, 'Nhóm 5', NULL, 1, 1, '2020-04-08 10:39:20'),
+(7, 'Nhóm 6', NULL, 1, 1, '2020-04-08 10:41:59'),
+(8, 'nhóm 7', NULL, 1, 1, '2020-04-08 10:42:41'),
+(9, 'nhóm 8', NULL, 1, 1, '2020-04-08 10:42:50'),
+(10, 'Nhóm 9', NULL, 1, 1, '2020-04-08 10:43:08'),
+(11, 'Nhóm 10', NULL, 1, 1, '2020-04-08 10:43:58'),
+(12, 'nhóm 11', NULL, 1, 1, '2020-04-08 10:44:52'),
+(13, 'Nhóm 12', NULL, 1, 1, '2020-04-08 10:50:55');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `group_announcement`
 --
 
+DROP TABLE IF EXISTS `group_announcement`;
 CREATE TABLE `group_announcement` (
   `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -59,6 +77,7 @@ CREATE TABLE `group_announcement` (
 -- Table structure for table `group_detail`
 --
 
+DROP TABLE IF EXISTS `group_detail`;
 CREATE TABLE `group_detail` (
   `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
@@ -70,12 +89,32 @@ CREATE TABLE `group_detail` (
   `date_confirmed` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `group_detail`
+--
+
+INSERT INTO `group_detail` (`id`, `group_id`, `user_id`, `is_lead`, `date_added`, `is_confirmed`, `token`, `date_confirmed`) VALUES
+(1, 1, 1, 1, '2020-04-08 10:06:09', 1, '0', '2020-04-08 10:06:09'),
+(2, 2, 1, 1, '2020-04-08 10:07:12', 1, '0', '2020-04-08 10:07:12'),
+(3, 3, 1, 1, '2020-04-08 10:09:55', 1, '0', '2020-04-08 10:09:55'),
+(4, 4, 1, 1, '2020-04-08 10:11:39', 1, '0', '2020-04-08 10:11:39'),
+(5, 5, 1, 1, '2020-04-08 10:30:49', 1, '0', '2020-04-08 10:30:49'),
+(6, 6, 1, 1, '2020-04-08 10:39:20', 1, '0', '2020-04-08 10:39:20'),
+(7, 7, 1, 1, '2020-04-08 10:41:59', 1, '0', '2020-04-08 10:41:59'),
+(8, 8, 1, 1, '2020-04-08 10:42:41', 1, '0', '2020-04-08 10:42:41'),
+(9, 9, 1, 1, '2020-04-08 10:42:50', 1, '0', '2020-04-08 10:42:50'),
+(10, 10, 1, 1, '2020-04-08 10:43:08', 1, '0', '2020-04-08 10:43:08'),
+(11, 11, 1, 1, '2020-04-08 10:43:58', 1, '0', '2020-04-08 10:43:58'),
+(12, 12, 1, 1, '2020-04-08 10:44:52', 1, '0', '2020-04-08 10:44:52'),
+(13, 13, 1, 1, '2020-04-08 10:50:55', 1, '0', '2020-04-08 10:50:55');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `project`
 --
 
+DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -94,6 +133,7 @@ CREATE TABLE `project` (
 -- Table structure for table `project_detail`
 --
 
+DROP TABLE IF EXISTS `project_detail`;
 CREATE TABLE `project_detail` (
   `id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
@@ -107,6 +147,7 @@ CREATE TABLE `project_detail` (
 -- Table structure for table `task`
 --
 
+DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -128,6 +169,7 @@ CREATE TABLE `task` (
 -- Table structure for table `task_category`
 --
 
+DROP TABLE IF EXISTS `task_category`;
 CREATE TABLE `task_category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -139,6 +181,7 @@ CREATE TABLE `task_category` (
 -- Table structure for table `task_category_group`
 --
 
+DROP TABLE IF EXISTS `task_category_group`;
 CREATE TABLE `task_category_group` (
   `id` int(11) NOT NULL,
   `category` int(11) NOT NULL,
@@ -151,6 +194,7 @@ CREATE TABLE `task_category_group` (
 -- Table structure for table `task_comment`
 --
 
+DROP TABLE IF EXISTS `task_comment`;
 CREATE TABLE `task_comment` (
   `id` int(11) NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
@@ -168,6 +212,7 @@ CREATE TABLE `task_comment` (
 -- Table structure for table `task_comment_reply`
 --
 
+DROP TABLE IF EXISTS `task_comment_reply`;
 CREATE TABLE `task_comment_reply` (
   `id` int(11) NOT NULL,
   `original_comment` int(11) NOT NULL,
@@ -180,6 +225,7 @@ CREATE TABLE `task_comment_reply` (
 -- Table structure for table `task_status`
 --
 
+DROP TABLE IF EXISTS `task_status`;
 CREATE TABLE `task_status` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -191,6 +237,7 @@ CREATE TABLE `task_status` (
 -- Table structure for table `task_status_group`
 --
 
+DROP TABLE IF EXISTS `task_status_group`;
 CREATE TABLE `task_status_group` (
   `id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
@@ -203,6 +250,7 @@ CREATE TABLE `task_status_group` (
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -336,7 +384,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `group_announcement`
@@ -348,7 +396,7 @@ ALTER TABLE `group_announcement`
 -- AUTO_INCREMENT for table `group_detail`
 --
 ALTER TABLE `group_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `project`

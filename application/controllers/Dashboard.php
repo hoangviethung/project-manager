@@ -6,9 +6,6 @@ class Dashboard extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->search=isset($_GET['search'])?$_GET['search']:FALSE;
-		$this->load->model('default/Group_model','group');
-		$this->load->model('default/Project_model','project');
-		$this->load->model('default/Task_model','task');
 	}
 	public function index()
 	{

@@ -2624,8 +2624,8 @@ body.disabled {
     background-image: url(../assets/icons/projects.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
     content: ''
 }
 
