@@ -33,7 +33,7 @@ class User_model extends CI_model
 		$this->db->join('user','group_detail.user_id = user.id');
 		$this->db->where('group_detail.group_id',$group_id);
 		$this->db->where('user.is_active',1);
-		$this->db->where('user.is_confirmed',1);
+		$this->db->where('group_detail.is_confirmed',1);
 		$result= $this->db->get('group_detail')->result();
 		if($result)
 		{

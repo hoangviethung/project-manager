@@ -56,6 +56,7 @@ class Group_model extends CI_model
 
 	public function get_groups_by_user($userId,$where = false)
 	{
+		$this->db->select('group.*,group_detail.is_lead,group_detail.date_added,group_detail.is_confirmed');
 		$this->db->where('group.is_active',1);
 		$this->db->join('group_detail','group_detail.group_id = group.id');
 		$this->db->where('group_detail.user_id',$userId);

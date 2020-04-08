@@ -30,11 +30,11 @@ class Dashboard extends MY_Controller {
 		{
 			foreach($this->data['recentTasks'] as $task)
 			{
-				if($task->status == getTaskStatus('Working On') && $task->assignee == $this->userInfo->id)
+				if($task->status == getTaskStatusId('Working On') && $task->assignee == $this->userInfo->id)
 				{
 					$taskAssignedToMe[] = $task;
 				}
-				if($task->status == getTaskStatus('Done') && $task->report_to == $this->userInfo->id)
+				if($task->status == getTaskStatusId('Done') && $task->report_to == $this->userInfo->id)
 				{
 					$taskAssignedToMe[] = $task;
 				}

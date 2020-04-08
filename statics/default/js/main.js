@@ -196,7 +196,25 @@
                         password: n
                     },
                     success: function(e) {
-                        200 == e ? ($.fancybox.close(), window.location.href=i) : alert(e)
+                        e = JSON.parse(e)
+                        '200' == e.code ? ($.fancybox.close(), window.location.href=i) : alert(e.message)
+                    }
+                })
+            })), $("#block-new-group button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-new-group .block-form input[name="name"]').val(),
+                    n = $('#block-new-group .block-form input[name="description"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: a,
+                        description: n
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? ($.fancybox.close(), window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-invite button").on("click", (function(e) {

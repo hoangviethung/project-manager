@@ -1,36 +1,37 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Group extends MY_Controller {
+class Group extends MY_Controller
+{
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-		$this->search=isset($_GET['search'])?$_GET['search']:FALSE;
-		$this->load->model('default/Group_model','group');
-		$this->load->model('default/Project_model','project');
-		$this->load->model('default/Task_model','task');
-		$this->load->model('default/User_model','user');
-        $this->data = array();
-		$this->id = $this->checkId($_GET['id']);
-		if($this->id)
-		{
+		$this->search = isset($_GET['search']) ? $_GET['search'] : FALSE;
+		$this->load->model('default/Group_model', 'group');
+		$this->load->model('default/Project_model', 'project');
+		$this->load->model('default/Task_model', 'task');
+		$this->load->model('default/User_model', 'user');
+		if (isset($_GET['id'])) {
+			$this->id = $this->checkId($_GET['id']);
+		}
+		if ($this->id) {
 			$this->data['users'] = $this->user->get_users_by_group($this->id);
-			$this->data['projects'] = $this->project->get_projects(array('group_id'=>$this->id));
-			foreach($this->data['projects'] as $project)
-			{
-				$tasks = $this->task->get_tasks(array('project_id'=>$project->id));
-				if($tasks)
-				{
-					foreach($tasks as $task)
-					{
-						$this->data['tasks'][] = $task;
+			$this->data['projects'] = $this->project->get_projects(array('group_id' => $this->id));
+			if ($this->data['projects']) {
+				foreach ($this->data['projects'] as $project) {
+					$tasks = $this->task->get_tasks(array('project_id' => $project->id));
+					if ($tasks) {
+						foreach ($tasks as $task) {
+							$this->data['tasks'][] = $task;
+						}
 					}
 				}
 			}
 		}
-    }
-    
-    public function index()
+	}
+
+	public function index()
 	{
 		switch ($this->act) {
 			case "new_group_save":
@@ -40,104 +41,99 @@ class Group extends MY_Controller {
 				$this->home();
 				break;
 		}
-    }
-    
+	}
+
 	public function home()
 	{
-        if($this->id)
-        {
-            $this->data['tasks'] = $this->task->get_by_id($this->id);
-            $this->data['projects'] = $this->project->get_by_id($this->id);
-            $this->data['title']	= "Trang Chủ";
-            $this->data['subview'] = 'dashboard/group/V_index';
-            $this->load->view('dashboard/_main_page',$this->data);
-        }else{
-            redirect(site_url("dashboard"));
-        }
-    }
-    
-    public function new_group_view()
-    {
-
+		if ($this->id) {
+			$this->data['tasks'] = $this->task->get_by_id($this->id);
+			$this->data['projects'] = $this->project->get_by_id($this->id);
+			$this->data['title']	= "Trang Chủ";
+			$this->data['subview'] = 'dashboard/group/V_index';
+			$this->load->view('dashboard/_main_page', $this->data);
+		} else {
+			redirect(site_url("dashboard"));
+		}
 	}
-	
+
+	public function new_group_view()
+	{
+	}
+
 	public function new_project_save()
-    {
-		if($this->id)
-		{
+	{
+		if ($this->id) {
 			$newProjectData = $this->input->post();
-			if($newProjectData)
-			{
+			if ($newProjectData) {
 				$newProjectData['group_id'] = $this->group_id;
-				$newProjectData['created_by'] = $this->userInfo->id;
-				if(!$newProjectData['leader'])
-				{
-					$newProjectData['leader'] = $this->userInfo->id;
+				$newProjectData['created_by'] = $this->data['infoLog']->id;
+				if (!$newProjectData['leader']) {
+					$newProjectData['leader'] = $this->data['infoLog']->id;
 				}
 				$newProjectData['last_update'] = getCurrentMySqlDate();
 				$newProjectId = $this->default_model->set_table('project')->sets($newProjectData)->save();
-				if($newProjectId){
+				if ($newProjectId) {
 					$newProjectUserData = array(
 						'project_id'	=>	$newProjectId,
-						'user_id'	=>	$this->userInfo->id,
+						'user_id'	=>	$this->data['infoLog']->id,
 						'is_lead'	=>	1,
-						'date_added'=>	getCurrentMySqlDate()
+						'date_added' =>	getCurrentMySqlDate()
 					);
 					$newProjectUserId = $this->default_model->set_table('project_detail')->sets($newProjectUserData)->save();
-					$this->default_model->set_table('group')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
-					$_SESSION['system_msg'] = messageDialog('div', 'success', 'Save thành công, ');
-					return redirect(site_url('dashboard/group?id='.$newProjectId.'token='.$this->userInfo->token));
-				}else{
+					$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
+					echo site_url('dashboard/group?id=' . $newProjectId . 'token=' . $this->data['infoLog']->token);
+				} else {
 					echo 'Có lỗi khi tạo nhóm';
 				}
-			}else{
+			} else {
 				echo 'Vui lòng nhập các trường cần thiết (*)';
 			}
-		}else{
-            redirect(site_url("dashboard"));
-        }
-	}
-
-    public function new_group_save()
-    {
-        $newGroupData = $this->input->post();
-		if($newGroupData)
-		{
-			$newGroupData['leader'] = $this->userInfo->id;
-			$newGroupData['last_update'] = getCurrentMySqlDate();
-			$newGroupId = $this->default_model->set_table('group')->sets($newGroupData)->save();
-			if($newGroupId)
-			{
-				$newGroupUserData = array(
-					'group_id'	=>	$newGroupId,
-					'user_id'	=>	$this->userInfo->id,
-					'is_lead'	=>	1,
-					'date_added'=>	getCurrentMySqlDate(),
-					'is_confirmed'=>	1,
-					'token'	=>	0,
-					'date_confirmed'	=>getCurrentMySqlDate()
-				);
-				$newGroupUserId = $this->default_model->set_table('group_detail')->sets($newGroupUserData)->save();
-				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Đăng nhập thành công, '.$newGroupData['user_name']);
-				return redirect(site_url('dashboard/group?id='.$newGroupId.'&token='.$this->userInfo->token));
-			}else{
-				echo 'Có lỗi khi tạo nhóm';
-			}
-		}else{
-			echo 'Vui lòng nhập các trường cần thiết (*)';
+		} else {
+			redirect(site_url("dashboard"));
 		}
 	}
-	
+
+	public function new_group_save()
+	{
+		$newGroupData = $this->input->post();
+		if ($newGroupData) {
+			$existedGroup = $this->M_myweb->sets(array('name' => $newGroupData['name']))->set_table('group')->get();
+			if ($existedGroup) {
+				$result = array("message" => "Tên Nhóm Đã Tồn Tại");
+			} else {
+				$newGroupData['leader'] = $this->data['infoLog']->id;
+				$newGroupData['last_update'] = getCurrentMySqlDate();
+				$newGroupId = $this->default_model->set_table('group')->sets($newGroupData)->save();
+				if ($newGroupId) {
+					$newGroupUserData = array(
+						'group_id'	=>	$newGroupId,
+						'user_id'	=>	$this->data['infoLog']->id,
+						'is_lead'	=>	1,
+						'date_added' =>	getCurrentMySqlDate(),
+						'is_confirmed' =>	1,
+						'token'	=>	0,
+						'date_confirmed'	=> getCurrentMySqlDate()
+					);
+					$newGroupUserId = $this->default_model->set_table('group_detail')->sets($newGroupUserData)->save();
+					$result = array("link" => site_url('dashboard/group?id=' . $newGroupId . '&token=' . $this->data['infoLog']->token),
+					'code' => 200);
+				} else {
+					$result = array("message" => "Có Lỗi Khi Tạo Nhóm");
+				}
+			}
+		} else {
+			$result = array("message" => "Có Lỗi Khi Tạo Nhóm");
+		}
+		echo json_encode($result);
+	}
+
 	public function invite_member()
 	{
-		if($this->id)
-		{
+		if ($this->id) {
 			$memberEmail = $this->input->post('email');
-			if($memberEmail)
-			{
-				$get = $this->user->get_user(array('email'=>$memberEmail));
-				if($get)
-				{
+			if ($memberEmail) {
+				$get = $this->user->get_user(array('email' => $memberEmail));
+				if ($get) {
 					$newMember = array(
 						'group_id' 		=> 	$this->id,
 						'user_id'  		=> 	$get->id,
@@ -145,15 +141,14 @@ class Group extends MY_Controller {
 						'token'			=>	randomString(30)
 					);
 					$newMemberSave = $this->default_model->set_table('group_detail')->sets($newMember)->save();
-					if($newMemberSave)
-					{
-						$this->default_model->set_table('group')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
+					if ($newMemberSave) {
+						$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
 						$emailData = array();
-						$emailData['content'] = 'Vui lòng xác nhận lời mời bằng link bên dưới: '.site_url('confirm_group_invite?uid='.$get->id.'&token='.$newMember['token']);
+						$emailData['content'] = 'Vui lòng xác nhận lời mời bằng link bên dưới: ' . site_url('confirm_group_invite?uid=' . $get->id . '&token=' . $newMember['token']);
 						$this->send_email($emailData);
 					}
 				}
-			}else{
+			} else {
 				echo 'Vui lòng nhập email';
 			}
 		}
@@ -161,28 +156,25 @@ class Group extends MY_Controller {
 
 	public function new_announcement_save()
 	{
-		if($this->id)
-		{
+		if ($this->id) {
 			$announcementData = $this->input->post();
-			if($announcementData)
-			{
-				$announcementData['created_by'] = $this->userInfo->id;
+			if ($announcementData) {
+				$announcementData['created_by'] = $this->data['infoLog']->id;
 				$announcementData['group_id'] = $this->id;
 				$announcementData['created_at'] = getCurrentMySqlDate();
 				$newAnnouncementId = $this->default_model->set_table('task_comment')->sets($announcementData)->setPrimary(false)->save();
-				if($newAnnouncementId)
-				{
-					$this->default_model->set_table('group')->sets(array('last_update'=>getCurrentMySqlDate()))->setPrimary($this->id)->save();
+				if ($newAnnouncementId) {
+					$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
 					$_SESSION['system_msg'] = messageDialog('div', 'success', 'Save thành công thông báo mới');
-					return redirect(site_url('dashboard/group?id=' . $this->id . 'token=' . $this->userInfo->token));
-				}else{
+					return redirect(site_url('dashboard/group?id=' . $this->id . 'token=' . $this->data['infoLog']->token));
+				} else {
 					echo 'Có lỗi khi Save thông báo';
 				}
-			}else{
-				echo 'Vui lòng nhập các trường cần thiết (*)'; 
+			} else {
+				echo 'Vui lòng nhập các trường cần thiết (*)';
 			}
-		}else{
-            redirect(site_url("dashboard"));
-        }
+		} else {
+			redirect(site_url("dashboard"));
+		}
 	}
 }

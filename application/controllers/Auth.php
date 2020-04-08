@@ -38,9 +38,10 @@ class Auth extends CI_Controller {
 				'token'			=>	randomString(30)
 			);
 			$_SESSION['system'] = (object)$session;
-			echo "200";
+			$result = array("code"=>"200");
 		}else{
-			echo "Sai Email Hoặc Password";
+			$result = array("message" => "Sai Email Hoặc Password");
 		}
+		echo json_encode($result);
 	}
 }
