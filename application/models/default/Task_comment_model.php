@@ -29,9 +29,10 @@ class Task_comment_model extends CI_model
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar');
+							user.avatar,task_comment_file.file');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
+		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
 		$this->db->order_by('created_at', 'DESC');
 		if($where)
 		{
@@ -51,12 +52,35 @@ class Task_comment_model extends CI_model
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar');
+							user.avatar,
+							task_comment_file.file');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
+		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
 		$this->db->order_by('created_at', 'DESC');
 		$this->db->where('task_comment.id',$task_id);
 		$result= $this->db->get('task_comment')->row();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
+	public function get_by_task($task_id)
+	{
+		$this->db->select('	task_comment.*,
+							user.user_name,
+							user.display_name,
+							user.email,
+							user.avatar,
+							task_comment_file.file');
+		$this->db->where('task_comment.is_active',1);
+		$this->db->join('user','user.id = task_comment.created_by');
+		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
+		$this->db->order_by('created_at', 'DESC');
+		$this->db->where('task_comment.task_id',$task_id);
+		$result= $this->db->get('task_comment')->result();
 		if($result)
 		{
 			return $result;
@@ -70,9 +94,11 @@ class Task_comment_model extends CI_model
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar');
+							user.avatar,
+							task_comment_file.file');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
+		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
 		$this->db->order_by('created_at', 'DESC');
 		$this->db->where('task_comment.created_by',$userId);
 		if($where)

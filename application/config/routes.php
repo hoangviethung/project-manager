@@ -58,6 +58,8 @@ $route['admin'] = 'cms/main';
 $route['dashboard/login'] = 'auth';
 $route['dashboard/logout'] = 'auth/logout';
 $route['dashboard/group'] = 'default/group';
+$route['dashboard/project'] = 'default/project';
+$route['dashboard/task'] = 'default/task';
 $route['dashboard/(:any)'] = 'dashboard/$1';
 $route['dashboard'] = 'dashboard';
 

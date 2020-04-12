@@ -3,20 +3,17 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 06:03 AM
+-- Generation Time: Apr 09, 2020 at 10:48 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 
 -- --------------------------------------------------------
@@ -52,7 +49,11 @@ INSERT INTO `group` (`id`, `name`, `description`, `leader`, `is_active`, `last_u
 (10, 'Nhóm 9', NULL, 1, 1, '2020-04-08 10:43:08'),
 (11, 'Nhóm 10', NULL, 1, 1, '2020-04-08 10:43:58'),
 (12, 'nhóm 11', NULL, 1, 1, '2020-04-08 10:44:52'),
-(13, 'Nhóm 12', NULL, 1, 1, '2020-04-08 10:50:55');
+(13, 'Nhóm 12', NULL, 1, 1, '2020-04-08 10:50:55'),
+(14, 'Nhóm 13', NULL, 1, 1, '2020-04-08 11:11:03'),
+(15, 'nhóm 14', NULL, 1, 1, '2020-04-09 14:25:08'),
+(16, 'Nhóm 15', NULL, 2, 1, '2020-04-08 11:31:28'),
+(17, 'Nhóm 16', NULL, 2, 1, '2020-04-08 11:31:42');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,12 @@ INSERT INTO `group_detail` (`id`, `group_id`, `user_id`, `is_lead`, `date_added`
 (10, 10, 1, 1, '2020-04-08 10:43:08', 1, '0', '2020-04-08 10:43:08'),
 (11, 11, 1, 1, '2020-04-08 10:43:58', 1, '0', '2020-04-08 10:43:58'),
 (12, 12, 1, 1, '2020-04-08 10:44:52', 1, '0', '2020-04-08 10:44:52'),
-(13, 13, 1, 1, '2020-04-08 10:50:55', 1, '0', '2020-04-08 10:50:55');
+(13, 13, 1, 1, '2020-04-08 10:50:55', 1, '0', '2020-04-08 10:50:55'),
+(14, 14, 1, 1, '2020-04-08 11:11:03', 1, '0', '2020-04-08 11:11:03'),
+(15, 15, 1, 1, '2020-04-08 11:11:10', 1, '0', '2020-04-08 11:11:10'),
+(16, 16, 1, 0, '2020-04-08 11:31:28', 1, '0', '2020-04-08 11:31:28'),
+(17, 17, 1, 0, '2020-04-08 11:31:42', 1, '0', '2020-04-08 11:31:42'),
+(18, 15, 2, 0, '2020-04-08 11:31:42', 1, '', '2020-04-08 11:31:42');
 
 -- --------------------------------------------------------
 
@@ -120,12 +126,24 @@ CREATE TABLE `project` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
-  `is_active` int(11) NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT '1',
   `group_id` int(11) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `leader` int(11) NOT NULL,
   `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`id`, `name`, `created_at`, `created_by`, `is_active`, `group_id`, `description`, `leader`, `last_update`) VALUES
+(1, 'Project 1', '2020-04-09 11:24:08', 1, 1, 15, NULL, 1, '2020-04-09 11:24:08'),
+(2, 'Project 1', '2020-04-09 11:24:23', 1, 0, 15, NULL, 1, '2020-04-09 11:24:23'),
+(3, 'Project 1', '2020-04-09 11:25:08', 1, 0, 15, NULL, 1, '2020-04-09 11:25:08'),
+(4, 'Project 2', '2020-04-09 11:26:12', 1, 1, 15, NULL, 1, '2020-04-09 11:26:12'),
+(5, 'Project 3', '2020-04-09 11:37:36', 1, 1, 15, NULL, 1, '2020-04-09 11:37:36'),
+(6, 'project 4', '2020-04-09 14:25:08', 1, 1, 15, 'project 4 test', 1, '2020-04-09 14:25:08');
 
 -- --------------------------------------------------------
 
@@ -138,8 +156,19 @@ CREATE TABLE `project_detail` (
   `id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `is_lead` int(11) NOT NULL
+  `is_lead` int(11) NOT NULL,
+  `date_added` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `project_detail`
+--
+
+INSERT INTO `project_detail` (`id`, `project_id`, `user_id`, `is_lead`, `date_added`) VALUES
+(1, 3, 1, 1, '2020-04-09 11:25:08'),
+(2, 4, 1, 1, '2020-04-09 11:26:12'),
+(3, 5, 1, 1, '2020-04-09 11:37:36'),
+(4, 6, 1, 1, '2020-04-09 14:25:08');
 
 -- --------------------------------------------------------
 
@@ -266,7 +295,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `user_name`, `email`, `password`, `display_name`, `is_active`, `avatar`) VALUES
-(1, 'admin', 'admin@test.com', '123456789', 'Admin', 1, NULL);
+(1, 'admin', 'admin@test.com', '123456789', 'Admin', 1, NULL),
+(2, 'test_user', 'test@test.com', '123456789', 'Test User', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -384,7 +414,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `group_announcement`
@@ -396,19 +426,19 @@ ALTER TABLE `group_announcement`
 -- AUTO_INCREMENT for table `group_detail`
 --
 ALTER TABLE `group_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `project_detail`
 --
 ALTER TABLE `project_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `task`
@@ -450,7 +480,7 @@ ALTER TABLE `task_status_group`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -517,6 +547,7 @@ ALTER TABLE `task_comment`
 ALTER TABLE `task_status_group`
   ADD CONSTRAINT `task_status_group_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
   ADD CONSTRAINT `task_status_group_ibfk_2` FOREIGN KEY (`status`) REFERENCES `task_status` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

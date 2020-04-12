@@ -204,7 +204,7 @@
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
                     a = $('#block-new-group .block-form input[name="name"]').val(),
-                    n = $('#block-new-group .block-form texarea[name="description"]').val();
+                    n = $('#block-new-group .block-form textarea[name="description"]').val();
                 $.ajax({
                     type: "POST",
                     url: t,
@@ -215,6 +215,44 @@
                     success: function (e) {
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Tạo thành công nhóm: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })),$("#block-new-project button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-new-project .block-form input[name="name"]').val(),
+                    n = $('#block-new-project .block-form textarea[name="description"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: a,
+                        description: n
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert('Tạo thành công dự án: '+e.projectName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })),$("#block-new-task button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    name = $('#block-new-task .block-form input[name="name"]').val(),
+                    description = $('#block-new-task .block-form textarea[name="description"]').val(),
+                    report_to = $('#block-new-task .block-form select[name="report_to"]').val(),
+                    assignee = $('#block-new-task .block-form select[name="assignee"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: name,
+                        description: description,
+                        report_to : report_to,
+                        assignee : assignee
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-invite-group button").on("click", (function(e) {
@@ -231,6 +269,39 @@
                     success: function(e) {
                         e = JSON.parse(e)
                         alert(e.message)
+                    }
+                })
+            })), $(".block-invite-project button").on("click", (function(e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    n = $(this).attr("redirect-url"),
+                    i = $(this).parents('.block-form').find('.form-group-email').find('textarea[name="email"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        email: i,
+                    },
+                    success: function(e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = n) : alert(e.message)
+                    }
+                })
+            })),  $("#block-announcement button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-announcement .block-form input[name="title"]').val(),
+                    n = $('#block-announcement .block-form textarea[name="description"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        title: a,
+                        description: n
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert('Announcement Published'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $(".item-click-dropdown").on("click", (function() {

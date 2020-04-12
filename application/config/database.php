@@ -74,15 +74,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 //Thông tin host cpanel
-'hostname' => '45.252.249.11',
-'username' => 'vikizonc',
-'password' => 'crE810vuC3',
-'database' => 'vikizonc_gazebo',
+// 'hostname' => '45.252.249.11',
+// 'username' => 'vikizonc',
+// 'password' => 'crE810vuC3',
+// 'database' => 'vikizonc_gazebo',
 //thông tin host local
-	// 'hostname' => 'localhost:3306',
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'gazebo',
+	'hostname' => 'localhost:3306',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'gazebo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

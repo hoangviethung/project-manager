@@ -13,7 +13,7 @@
                 <?php if ($groups) : ?>
                     <?php $count = 0; ?>
                     <?php foreach ($groups as $group) : ?>
-                        <?php if ($group->is_lead == $infoLog->id) : ?>
+                        <?php if ($group->leader == $infoLog->id) : ?>
                             <div class="item">
                                 <a href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $group->id . '&token=' . $infoLog->token); ?>">
                                     <div class="name"><?php echo !empty($group->name) ? $group->name : "(Không Tên)"; ?></div>
@@ -35,7 +35,7 @@
                 <?php if ($groups) : ?>
                     <?php $count = 0; ?>
                     <?php foreach ($groups as $group) : ?>
-                        <?php if ($group->is_lead != $infoLog->id) : ?>
+                        <?php if ($group->leader != $infoLog->id) : ?>
                             
                             <div class="item">
                                 <a href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $group->id . '&token=' . $infoLog->token); ?>">

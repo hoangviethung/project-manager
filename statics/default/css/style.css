@@ -40,9 +40,94 @@ font-family: 'object-fit: cover, object-position: center';
 {
     background:none;
     text-align: center;
+    margin-right:20px;
 }
 .list-user .user .group-member-avatar {
     border-radius: 50%;
     width:50px;
-    height:50px
+    height:50px;
+    margin:auto;
+}
+.group-detail-tab-list{
+    border-color:transparent !important;
+    box-shadow: 0px 4px 4px -4px rgba(0, 0, 0, .16);
+    margin-bottom:5px;
+}
+.group-detail-tab-item{
+    border-color:transparent !important;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    color:rgba(141, 115, 128, 0.582);
+    padding:8px 0px;
+    margin-right:20px;
+}
+.group-detail-tab-item.active::after{
+    content:"";
+    position: absolute;
+    bottom:-2px;
+    left:50%;
+    transform: translateX(-50%);
+    width:70%;
+    background:rgba(43, 88, 211, 0.699);
+    height:2px;
+    border-radius: 10px;
+}
+.project-possible-users-list{
+    max-height:300px;
+    overflow: auto;
+}
+.project-possible-user{
+    display: flex;
+    padding:5px;
+}
+.project-possible-user:hover{
+    background:rgba(141, 115, 128, 0.144);
+}
+.project-possible-user span{
+    line-height:40px;
+    margin-left:10px;
+    font-size: 14px;
+    font-weight: 600;
+    color:rgba(68, 49, 58, 0.582);
+}
+.list-user-project .user{
+margin-left:10px;
+}
+.list-user-project .user .avatar{
+    width:35px;
+    height:35px;
+}
+.list-user-project .user img{
+    display:flex;
+}
+.block-announcement .title{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom:10px;
+}
+.status-button{
+    border-radius:30px;
+    font-size: 14px;
+    font-weight: 700;
+    padding:5px 15px;
+    margin-left:10px;
+}
+.img_input{
+    position: relative;
+}
+#chooseImgFile{
+	height: 250px;
+	width: 250px;
+	position: absolute;
+    top: 0;
+    left:0;
+	opacity: 0;
+	cursor: pointer;
+}
+img#imgFile{cursor: pointer;max-width:100px;max-height:100px;}
+img.imgFile{height:auto;;max-width: 100%;}
+.img-fluid{
+	width:100%;
+	height:auto;
 }

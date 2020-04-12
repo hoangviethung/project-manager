@@ -12,13 +12,15 @@
             <!-- ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS-->
             <?php if ($recentTasks) : ?>
                 <?php foreach ($recentTasks as $recentTask) : ?>
-                    <div class="item">
+                <a href="<?php echo site_url('dashboard/task?act=task_detail&id='.$recentTask->id.'&token='.$infoLog->token);?>">
+                <div class="item">
                         <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div>
                         <div class="text">
-                            <div class="name">Task 1</div>
-                            <div class="history">Changed Recently</div>
+                        <div class="name"><?php echo $recentTask->name .' (ID#: '.$recentTask->id.')';?></div>
+                            <div class="history">Changed Recently: <?php echo $recentTask->last_update;?></div>
                         </div>
                     </div>
+                </a>
                 <?php endforeach; ?>
             <?php else : ?>
                 No recent tasks
@@ -38,7 +40,7 @@
                 <?php if ($groups) : ?>
                     <?php $count = 0; ?>
                     <?php foreach ($groups as $group) : ?>
-                        <?php if ($group->is_lead == $infoLog->id) : ?>
+                        <?php if ($group->leader == $infoLog->id) : ?>
                             <?php $count++; ?>
                             <div class="item">
                                 <a href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $group->id . '&token=' . $infoLog->token); ?>">
@@ -64,7 +66,7 @@
                 <?php if ($groups) : ?>
                     <?php $count = 0; ?>
                     <?php foreach ($groups as $group) : ?>
-                        <?php if ($group->is_lead != $infoLog->id) : ?>
+                        <?php if ($group->leader != $infoLog->id) : ?>
                             <?php $count++; ?>
                             <div class="item">
                                 <a href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $group->id . '&token=' . $infoLog->token); ?>">
@@ -94,21 +96,13 @@
             <?php if ($recentProjects) : ?>
                 <?php foreach ($recentProjects as $recentProject) : ?>
                     <div class="item">
-                        <div class="icon-projects" data-width="40" data-height="40" data-bg="#EA4E9D"></div>
-                        <div class="text">
-                            <div class="name">Project 1</div>
-                            <div class="history">Visited Today</div>
-                        </div>
-                        <div class="list-user ml-at">
-                            <!-- USER CÓ ẢNH-->
-                            <div class="user">
-                                <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt=""></div>
+                                <div class="icon-projects" data-width="40" data-height="40" data-bg="#EA4E9D"></div>
+                                <div class="text">
+                                    <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id='.$recentProject->id.'&token='.$infoLog->token);?>"><?php echo !empty($recentProject->name) ? $recentProject->name : "Không Tên"; ?> (ID#: <?php echo $recentProject->id;?>)</a></div>
+                                    <div class="history">Last Updated : <?php echo $recentProject->last_update; ?></div>
+                                </div>
+
                             </div>
-                            <?php if ($recentProject->leader == $userInfo) : ?>
-                                <div class="add-user" data-fancybox data-src="#block-invite">Invite +</div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
                 <?php endforeach; ?>
             <?php else : ?>
                 No recent project

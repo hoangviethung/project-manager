@@ -220,7 +220,7 @@ function do_upload($dir, $file)
 
 		return $filename;
 	}
-
+}
 	function getTaskStatusId($status)
 	{
 		switch ($status) {
@@ -249,4 +249,5 @@ function do_upload($dir, $file)
 			3 => "Confirmed"
 		);
 	}
-}
+
+

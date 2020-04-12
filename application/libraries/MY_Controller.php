@@ -4,7 +4,6 @@ class MY_Controller extends CI_Controller {
     public $data = array();
 	public function __construct() {
 		parent::__construct();
-		$this->load->helper('obisys');
 		$this->load->model('M_myweb','default_model');
 		$this->load->model('default/Group_model','group');
 		$this->load->model('default/Project_model','project');
@@ -25,8 +24,8 @@ class MY_Controller extends CI_Controller {
 		{
 			$this->data['groups'] = $this->group->get_groups_by_user($this->data['infoLog']->id);
 		}
-		
 	}
+
 	private function systemDefault(){
 		$this->act = isset($_GET['act'])?$_GET['act']:'';
 		$this->controller = $this->uri->segment(2);

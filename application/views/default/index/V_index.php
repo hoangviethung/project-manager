@@ -21,13 +21,8 @@
 			<div class="container">
 				<div class="row no-gutters ai-c">
 					<div class="logo"><a href="#"><img class="lazyload blur-up" data-src="<?php echo base_url('assets/');?>logo.svg" alt="" srcset=""></a></div>
-					<div class="nav-list">
-						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
-						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
-						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
-						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
-					</div>
 					<div class="nav-list ml-at">
+						<div class="nav-item"><a class="nav-link" href="#">WHY LOGO?</a></div>
 						<div class="nav-item"><a class="nav-link" href="#">Contact Sales</a></div>
 						<div class="nav-item"><a class="nav-link" data-fancybox data-src="#block-login">LOG IN</a></div>
 						<div class="nav-item"><a class="btn btn-view-more" href="#">Try for free</a></div>
@@ -226,12 +221,11 @@
 						<div class="title-footer">About Us</div>
 						<ul class="list-link-footer">
 							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-md-3 col-lg-2">
+						<div class="title-footer">About Us</div>
+						<ul class="list-link-footer">
 							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
 						</ul>
 					</div>
@@ -239,51 +233,17 @@
 						<div class="title-footer">About Us</div>
 						<ul class="list-link-footer">
 							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-6 col-md-3 col-lg-2">
 						<div class="title-footer">About Us</div>
 						<ul class="list-link-footer">
 							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-6 col-md-3 col-lg-2">
 						<div class="title-footer">About Us</div>
 						<ul class="list-link-footer">
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-						</ul>
-					</div>
-					<div class="col-sm-6 col-md-3 col-lg-2">
-						<div class="title-footer">About Us</div>
-						<ul class="list-link-footer">
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
-							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
 							<li class="link"><a class="lcl lcl-1" href="#">Link</a></li>
 						</ul>
 					</div>

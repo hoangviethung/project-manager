@@ -75,9 +75,11 @@ class Project_model extends CI_model
 
 	public function get_recent_projects_by_user($userId)
 	{
+		$this->db->select('project.*,project_detail.is_lead,project_detail.date_added');
 		$this->db->where('project.is_active',1);
 		$this->db->join('project_detail','project_detail.project_id = project.id');
 		$this->db->where('project_detail.user_id',$userId);
+		$this->db->group_by('project_detail.project_id'); 
 		$this->db->order_by('project.last_update','desc');
 		$result= $this->db->get('project')->result();
 		if($result)

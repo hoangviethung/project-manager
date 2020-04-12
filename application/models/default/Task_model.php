@@ -27,8 +27,8 @@ class Task_model extends CI_model
 	{
 		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->join('task_category','task_category.id = task.category_id','left');
+		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->order_by('task.last_update','desc');
 		if($where)
 		{
@@ -46,8 +46,8 @@ class Task_model extends CI_model
 	{
 		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->join('task_category','task_category.id = task.category_id','left');
+		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->where('task.id',$task_id);
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->row();
@@ -62,10 +62,10 @@ class Task_model extends CI_model
 	{
 		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
+		$this->db->join('task_category','task_category.id = task.category_id','left');
+		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->group_start();
-		$this->db->where('task.assignee',$userId);
+		$this->db->or_where('task.assignee',$userId);
 		$this->db->or_where('task.assigner',$userId);
 		$this->db->or_where('task.report_to',$userId);
 		$this->db->group_end();
@@ -85,13 +85,9 @@ class Task_model extends CI_model
 	{
 		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
-		$this->db->group_start();
-		$this->db->where('task.assignee',$userId);
-		$this->db->or_where('task.assigner',$userId);
-		$this->db->or_where('task.report_to',$userId);
-		$this->db->group_end();
+		$this->db->join('task_category','task_category.id = task.category_id','left');
+		$this->db->join('task_status','task_status.id = task.status','left');
+		$this->db->where('(task.assignee ='.$userId.' or task.assigner ='.$userId.' or task.report_to ='.$userId.')');
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->result();
 		if($result)

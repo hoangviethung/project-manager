@@ -24,9 +24,12 @@
 			</div>
 			<ul class="list-link list-link-favorites">
 				<?php if ($groups) : ?>
-					<?php for ($i = 0; $i < 4; $i++) : ?>
-						<li class="link <?php echo uri_string() == 'dashboard/group' && isset($_GET['id']) && $_GET['id'] == $groups[$i]->id ? 'active' : ''; ?>"><a data-bg-after-color="<?php echo $groups[$i]->leader == $infoLog->id ? 'green' : 'pink'; ?>" href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $groups[$i]->id . '&token=' . $infoLog->token); ?>"><?php echo !empty($groups[$i]->name) ? $groups[$i]->name : "Không Tên"; ?></a></li>
-					<?php endfor; ?>
+					<?php $count=0;?>
+					<?php foreach ($groups as $group) : ?>
+						<?php $count++;
+						if($count > 4){break;}?>
+						<li class="link <?php echo uri_string() == 'dashboard/group' && isset($_GET['id']) && $_GET['id'] == $group->id ? 'active' : ''; ?>"><a data-bg-after-color="<?php echo $group->leader == $infoLog->id ? 'green' : 'pink'; ?>" href="<?php echo site_url('dashboard/group?act=group_detail&id=' . $group->id . '&token=' . $infoLog->token); ?>"><?php echo !empty($group->name) ? $group->name : "Không Tên"; ?></a></li>
+					<?php endforeach; ?>
 				<?php else : ?>
 					No Joined Groups
 				<?php endif; ?>
