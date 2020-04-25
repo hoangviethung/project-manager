@@ -8,8 +8,12 @@ class Project extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('default/User_model', 'user');
-		$this->id = isset($_GET['id'])?$_GET['id']:'';
+		$this->id = isset($_GET['id']) ? $_GET['id'] : '';
 		$this->id = $this->checkId($this->id);
+		if ($this->id) {
+			$this->data['project'] = $this->project->get_by_id($this->id);
+			$this->data['group'] = $this->group->get_by_id($this->data['project']->id);
+		}
 	}
 
 	public function index()
@@ -24,6 +28,9 @@ class Project extends MY_Controller
 			case "add_member":
 				$this->add_member();
 				break;
+			case "edit_save":
+				$this->edit_save();
+				break;
 			default:
 				$this->home();
 				break;
@@ -32,7 +39,7 @@ class Project extends MY_Controller
 
 	public function home()
 	{
-		$this->data['title']	= "Trang Chủ";
+		$this->data['title']	= "My Projects";
 		$this->data['subview'] = 'dashboard/project/V_project_detail';
 		$this->load->view('dashboard/_main_page', $this->data);
 	}
@@ -40,10 +47,8 @@ class Project extends MY_Controller
 	public function project_detail()
 	{
 		if ($this->id) {
-			$this->data['project'] = $this->project->get_by_id($this->id);
 			$this->data['projectUsers'] = $this->user->get_users_by_project($this->id);
 			$this->data['possibleUsers'] = $this->get_project_possible_users($this->data['project'], $this->data['projectUsers']);
-
 			$this->data['recentTasks'] = $this->task->get_tasks(array('project_id' => $this->id));
 			$recentTasks = $this->data['recentTasks'];
 			$taskAssignedToMe = array();
@@ -118,29 +123,22 @@ class Project extends MY_Controller
 		echo json_encode($result);
 	}
 
-	public function edit_project_view()
-	{
-		$this->data['projectData'] = $this->project->get_by_id($this->id);
-		$this->data['title']	= "Trang Chủ";
-		$this->data['subview'] = 'dashboard/project/V_edit_project';
-		$this->load->view('dashboard/_main_page', $this->data);
-	}
-
-	public function edit_project_save()
+	public function edit_save()
 	{
 		$projectData = $this->input->post();
 		if ($projectData) {
 			$projectData['last_update'] = getCurrentMySqlDate();
-			$savedProjectId = $this->default_model->set_table('project')->sets($projectData)->setPrimary($this->id)->save();
-			if ($savedProjectId) {
-				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Save thành công, ');
-				return redirect(site_url('dashboard/group?id=' . $savedProjectId . 'token=' . $this->data['infoLog']->token));
-			} else {
-				echo 'Có lỗi khi Save';
-			}
+			$this->default_model->set_table('project')->sets($projectData)->setPrimary($this->id)->save();
+			$project = $this->project->get_by_id($this->id);
+			$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($project->group_id)->save();
+			$result = array(
+				"link" => site_url('dashboard/project?act=project_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token),
+				'code' => 200
+			);
 		} else {
-			echo 'Vui lòng nhập các trường cần thiết (*)';
+			$result = array("message" => "Error Saving");
 		}
+		echo json_encode($result);
 	}
 
 	public function edit_project_category_view()
@@ -197,51 +195,67 @@ class Project extends MY_Controller
 
 	public function add_member()
 	{
-		if ($this->id) {
-			$emailList = $this->input->post('email');
-			if (!empty($emailList)) {
-				$emailListArray = explode(',', $emailList);
-				$notExistedEmail = '';
-				$existedEmail = '';
-				foreach ($emailListArray as $email) {
-					if (trim($email) != '') {
-						$userData = $this->user->get_user(array('email' => trim($email)));
+		if (!$this->id) {
+			$result['message'] =  'Error creating task';
+			echo json_encode($result);
+			return false;
+		}
+		$emailList = $this->input->post('email');
+		if (empty($emailList)) {
+			$result = array(
+				'message' => 'Please Enter an Email'
+			);
+			echo json_encode($result);
+			return false;
+		}
+		$emailListArray = explode(',', $emailList);
+		$notExistedEmail = '';
+		$existedEmail = '';
+		$notPermittedEmail = '';
+		$groupUsers = $this->user->get_users_by_group($this->data['project']->group_id);
+		$groupUsersEmail = array();
+		foreach($groupUsers as $user)
+		{
+			$groupUsersEmail[] = $user->email;
+		}
+		foreach ($emailListArray as $email) {
+			if (trim($email) != '') {
+				$userData = $this->user->get_user(array('email' => trim($email)));
+				if (isset($userData) && $userData) {
+					if (!in_array(trim($email), $groupUsersEmail)) {
+						$notPermittedEmail = $notPermittedEmail . $email . '; ';
+					} else {
 						$check = $this->user->get_1_user_by_project($this->id, $userData->id);
 						if ($check) {
 							$existedEmail = $existedEmail . $email . '; ';
 						} else {
-							if (isset($userData) && $userData) {
-								$newMemberData = array(
-									'project_id'	=>	$this->id,
-									'user_id'	=>	$userData->id,
-									'is_lead'	=>	0,
-									'date_added' =>	getCurrentMySqlDate()
-								);
-								$newMemberSave = $this->default_model->set_table('project_detail')->sets($newMemberData)->setPrimary(false)->save();
-								$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
-							} else {
-								$notExistedEmail = $notExistedEmail . $email . '; ';
-							}
+							$newMemberData = array(
+								'project_id'	=>	$this->id,
+								'user_id'	=>	$userData->id,
+								'is_lead'	=>	0,
+								'date_added' =>	getCurrentMySqlDate()
+							);
+							$newMemberSave = $this->default_model->set_table('project_detail')->sets($newMemberData)->setPrimary(false)->save();
+							$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
 							$result = array(
 								'code' => '200',
 								'message' => 'Add user successfully'
 							);
 						}
-						if ($notExistedEmail != "") {
-							$result['message'] = ' Email sau không tồn tại: ' . $notExistedEmail;
-						}
-						if ($existedEmail != "") {
-							$result['message'] = ' Email sau đã có trong project: ' . $existedEmail;
-						}
 					}
+				} else {
+					$notExistedEmail = $notExistedEmail . $email . '; ';
 				}
-			} else {
-				$result = array(
-					'message' => 'Please Enter an Email'
-				);
 			}
-		} else {
-			$result['message'] =  'Error creating task';
+		}
+		if ($notExistedEmail != "") {
+			$result['message'] = ' Email sau không tồn tại: ' . $notExistedEmail;
+		}
+		if ($existedEmail != "") {
+			$result['message'] = ' Email sau đã có trong project: ' . $existedEmail;
+		}
+		if ($notPermittedEmail != "") {
+			$result['message'] = ' Email sau chưa có trong group: ' . $notPermittedEmail;
 		}
 		echo json_encode($result);
 	}

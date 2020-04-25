@@ -18,11 +18,12 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="icon-projects group-detail-icon-projects" data-width="150" data-height="150" data-bg="#ffc98b"></div>
+                    <a data-fancybox class='link-item' data-src="#block-edit-group">Edit Info</a>
                 </div>
                 <div class="col-lg-9">
                     <div class="leader">
                         <p><b>Leader : </b></p>
-                        <figure class="leader-avatar-figure"><img class="leader-avatar" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo !empty($group->avatar) ? $group->avatar : "user-default.png"; ?>" alt="" srcset=""></figure>
+                        <figure class="leader-avatar-figure"><img class="leader-avatar" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo !empty($group->avatar) ? $group->avatar : "user-default.png"; ?>" alt="" srcset=""></figure>
                         <span><?php echo $group->display_name; ?></span>
                     </div>
                     <br>
@@ -38,9 +39,9 @@
                                 <div class="user">
                                     <div class="group-member-avatar ov-h">
                                         <?php if (empty($user->avatar)) : ?>
-                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt="">
+                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/user-default.png" alt="">
                                         <?php else : ?>
-                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo $user->avatar; ?>" alt="">
+                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $user->avatar; ?>" alt="">
                                         <?php endif; ?>
                                     </div>
                                     <p><?php echo $user->display_name; ?></p>
@@ -127,9 +128,9 @@
                                     <!-- USER CÓ ẢNH-->
                                     <div class="user">
                                         <?php if (empty($project->avatar)) : ?>
-                                            <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt=""></div>
+                                            <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/user-default.png" alt=""></div>
                                         <?php else : ?>
-                                            <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo $project->avatar; ?>" alt=""></div>
+                                            <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $project->avatar; ?>" alt=""></div>
                                         <?php endif; ?>
                                     </div>
                                     <?php 
@@ -166,11 +167,11 @@
                                                             <div class="project-possible-user">
                                                                 <?php if (empty($possibleUser->avatar)) : ?>
                                                                     <figure>
-                                                                        <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt="">
+                                                                        <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/user-default.png" alt="">
                                                                     </figure>
                                                                 <?php else : ?>
                                                                     <figure>
-                                                                        <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo $possibleUser->avatar; ?>" alt="">
+                                                                        <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $possibleUser->avatar; ?>" alt="">
                                                                     </figure>
                                                                 <?php endif; ?>
                                                                 <span>
@@ -180,7 +181,7 @@
                                                         <?php endforeach; ?>
                                                     </div>
                                                 <?php else : ?>
-                                                    No Users
+                                                    No Users Possible
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group ta-r">
@@ -244,6 +245,24 @@
                     <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/group?act=new_project_save&id=' . $group->id . '&token=' . $infoLog->token); ?>">New Project</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="d-n">
+    <div class="block-form-ajax" id="block-edit-group" data-max-width="900">
+        <h2>Edit Info</h2>
+        <div class="block-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="name" placeholder="" value="<?php echo $group->name;?>">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4"><?php echo $group->description;?></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/group?act=edit_save&id=' . $group->id . '&token=' . $infoLog->token); ?>">Edit Group</button>
+                </div>
         </div>
     </div>
 </div>

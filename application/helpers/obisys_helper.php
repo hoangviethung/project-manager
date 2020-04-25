@@ -208,6 +208,7 @@ function do_upload($dir, $file)
 		rename($path . '/' . $dl_file['orig_name'], $path_new);
 		//Thumbnail Image Upload - Start
 		$config['image_library'] = 'gd2';
+		$config['allowed_types'] = 'gif|jpg|png|csv|sql|doc|docx|xls|xlsx';
 		$config['source_image'] = $path . '/' . $filename;
 		$config['new_image'] = $path_thumb . '/' . $filename;
 		$config['maintain_ratio'] = TRUE;

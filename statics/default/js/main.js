@@ -304,7 +304,60 @@
                         '200' == e.code ? (alert('Announcement Published'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
-            })), $(".item-click-dropdown").on("click", (function() {
+            })), $("#block-edit-group button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-edit-group .block-form input[name="name"]').val(),
+                    n = $('#block-edit-group .block-form textarea[name="description"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: a,
+                        description: n
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })), $("#block-edit-project button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-edit-project .block-form input[name="name"]').val(),
+                    n = $('#block-edit-project .block-form textarea[name="description"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: a,
+                        description: n
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })), $("#block-edit-task button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-edit-task .block-form input[name="name"]').val(),
+                    n = $('#block-edit-task .block-form textarea[name="description"]').val(),
+                    m = $('#block-edit-task .block-form select[name="assignee"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        name: a,
+                        description: n,
+                        assignee : m
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })),$(".item-click-dropdown").on("click", (function() {
                 $(this).siblings(".content-dropdown").slideToggle()
             })), $(".aside-list .aside-item").children(".list-link").addClass("list-link-level--1"), $(".aside-list .aside-item").children(".name").addClass("name-link-level--1"), $(".aside-list .aside-item .list-link-level--1").children(".link").addClass("link-level--1"), $(".aside-list .aside-item .list-link-level--1").find(".list-link").addClass("list-link-level--2"), $(".aside-list .aside-item .link-level--1").children(".name").addClass("name-link-level--2"), $(".aside-list .aside-item .list-link-level--2").children(".link").addClass("link-level--2"), $(".aside-list .aside-item .name-link-level--1").on("click", (function() {
                 var e = $(".aside-list .aside-item .name-link-level--1").not(this);
@@ -313,7 +366,11 @@
                 var e = $(".aside-list .aside-item .name-link-level--2").not(this);
                 $(this).siblings(".list-link").slideToggle(), $(this).toggleClass("active"), e.siblings(".list-link").slideUp(), e.removeClass("active")
             })), $(window).width() < 1024 && $("body, aside").addClass("active"), $(".block-logo .button-close").on("click", (function() {
-                $(window).width() > 1024 && ($(this).toggleClass("active"), $("body, aside").toggleClass("active"))
+                $(window).width() > 1024 && ($(this).toggleClass("active"), $("body, aside").toggleClass("active"));
+                setTimeout(function(){
+                asideWidth = $('aside').width();
+                $('.header-breadcrumb').css('margin-left',asideWidth + 20);
+                }, 200);
             }))
         })), document.addEventListener("resize", (function() {
             s(".thumbnail-image,.review-image,.index-5"), l()

@@ -18,11 +18,12 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="icon-projects group-detail-icon-projects" data-width="150" data-height="150" data-bg="#ffc98b"></div>
+                    <a data-fancybox class='link-item' data-src="#block-edit-project">Edit Info</a>
                 </div>
                 <div class="col-lg-9">
                     <div class="leader">
                         <p><b>Leader : </b></p>
-                        <figure class="leader-avatar-figure"><img class="leader-avatar" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo !empty($project->avatar) ? $project->avatar : "user-default.png"; ?>" alt="" srcset=""></figure>
+                        <figure class="leader-avatar-figure"><img class="leader-avatar" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo !empty($project->avatar) ? $project->avatar : "user-default.png"; ?>" alt="" srcset=""></figure>
                         <span><?php echo $project->display_name; ?></span>
                     </div>
                     <br>
@@ -31,16 +32,16 @@
                 <div class="col-lg-12">
                     <div class="group-member">
                         <div class="name">
-                            <h5 class="lcl lcl-1">Group Member</h5>
+                            <h5 class="lcl lcl-1">Project Member</h5>
                         </div>
                         <div class="list-link list-user">
                             <?php foreach ($projectUsers as $user) : ?>
                                 <div class="user">
                                     <div class="group-member-avatar ov-h">
                                         <?php if (empty($user->avatar)) : ?>
-                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt="">
+                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/user-default.png" alt="">
                                         <?php else : ?>
-                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo $user->avatar; ?>" alt="">
+                                            <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $user->avatar; ?>" alt="">
                                         <?php endif; ?>
                                     </div>
                                     <small><?php echo $user->display_name; ?></small>
@@ -81,11 +82,11 @@
                                         <div class="project-possible-user">
                                             <?php if (empty($possibleUser->avatar)) : ?>
                                                 <figure>
-                                                    <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt="">
+                                                    <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/user-default.png" alt="">
                                                 </figure>
                                             <?php else : ?>
                                                 <figure>
-                                                    <img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/<?php echo $possibleUser->avatar; ?>" alt="">
+                                                    <img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $possibleUser->avatar; ?>" alt="">
                                                 </figure>
                                             <?php endif; ?>
                                             <span>
@@ -143,7 +144,7 @@
                         <?php foreach ($taskMonitoredByMe as $task) : ?>
                             <a href="<?php echo site_url('dashboard/task?act=task_detail&id=' . $task->id . '&token=' . $infoLog->token); ?>">
                                 <div class="item">
-                                    <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div>
+                                    <div class="icon-projects" data-width="20" data-height="20" data-bg="#26ff00"></div>
                                     <div class="text">
                                         <div class="name"><?php echo $task->name . ' (ID#: ' . $task->id . ')'; ?></div>
                                         <div class="history">Changed Recently: <?php echo $task->last_update; ?></div>
@@ -168,13 +169,15 @@
                     <!-- ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS-->
                     <?php if ($recentTasks) : ?>
                         <?php foreach ($recentTasks as $recentTask) : ?>
+                            <a href="<?php echo site_url('dashboard/task?act=task_detail&id=' . $recentTask->id . '&token=' . $infoLog->token); ?>">
                             <div class="item">
-                                <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div>
+                                <div class="icon-projects" data-width="20" data-height="20" data-bg="#00FFFF"></div>
                                 <div class="text">
                                     <div class="name"><?php echo $recentTask->name . '(ID#: ' . $recentTask->id . ')'; ?></div>
                                     <div class="history">Changed Recently: <?php echo $recentTask->last_update; ?></div>
                                 </div>
                             </div>
+                        </a>
                         <?php endforeach; ?>
                     <?php else : ?>
                         No recent tasks
@@ -194,7 +197,7 @@
         <div class="block-form">
             <form action="#">
                 <div class="form-group">
-                    <label>Project Title</label>
+                    <label>Task Title</label>
                     <input type="text" name="name" placeholder="">
                 </div>
                 <div class="form-group">
@@ -225,6 +228,24 @@
                     <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/project?act=new_task_save&id=' . $project->id . '&token=' . $infoLog->token); ?>">New Tasks</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="d-n">
+    <div class="block-form-ajax" id="block-edit-project" data-max-width="900">
+        <h2>Edit Info</h2>
+        <div class="block-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="name" placeholder="" value="<?php echo $project->name;?>">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4"><?php echo $project->description;?></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/project?act=edit_save&id=' . $project->id . '&token=' . $infoLog->token); ?>">Edit project</button>
+                </div>
         </div>
     </div>
 </div>

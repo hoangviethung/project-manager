@@ -28,12 +28,10 @@ class Task_comment_model extends CI_model
 		$this->db->select('	task_comment.*,
 							user.user_name,
 							user.display_name,
-							user.email,
-							user.avatar,task_comment_file.file');
+							user.email');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
-		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
-		$this->db->order_by('created_at', 'DESC');
+		$this->db->order_by('created_at', 'asc');
 		if($where)
 		{
 			$this->where_condition($where);
@@ -46,18 +44,30 @@ class Task_comment_model extends CI_model
 		return false;
 	}
 
+	public function get_task_comment_file($taskId)
+	{
+		$this->db->select('	
+			task_comment_file.id as file_id,
+			task_comment_file.file,
+			task_comment_file.comment_id');
+		$this->db->where('comment_id',$taskId);
+		$result= $this->db->get('task_comment_file')->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
 	public function get_by_id($task_id)
 	{
 		$this->db->select('	task_comment.*,
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar,
-							task_comment_file.file');
+							user.avatar');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
-		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
-		$this->db->order_by('created_at', 'DESC');
+		$this->db->order_by('created_at', 'asc');
 		$this->db->where('task_comment.id',$task_id);
 		$result= $this->db->get('task_comment')->row();
 		if($result)
@@ -73,12 +83,10 @@ class Task_comment_model extends CI_model
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar,
-							task_comment_file.file');
+							user.avatar');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
-		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
-		$this->db->order_by('created_at', 'DESC');
+		$this->db->order_by('created_at', 'asc');
 		$this->db->where('task_comment.task_id',$task_id);
 		$result= $this->db->get('task_comment')->result();
 		if($result)
@@ -94,12 +102,10 @@ class Task_comment_model extends CI_model
 							user.user_name,
 							user.display_name,
 							user.email,
-							user.avatar,
-							task_comment_file.file');
+							user.avatar');
 		$this->db->where('task_comment.is_active',1);
 		$this->db->join('user','user.id = task_comment.created_by');
-		$this->db->join('task_comment_file','task_comment_file.comment_id = task_comment.id','left');
-		$this->db->order_by('created_at', 'DESC');
+		$this->db->order_by('created_at', 'asc');
 		$this->db->where('task_comment.created_by',$userId);
 		if($where)
 		{

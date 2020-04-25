@@ -12,6 +12,11 @@ class Task extends MY_Controller
 		$this->load->model('default/Task_comment_model', 'task_comment');
 		$this->id = isset($_GET['id']) ? $_GET['id'] : '';
 		$this->id = $this->checkId($this->id);
+		if ($this->id) {
+			$this->data['task'] = $this->task->get_by_id($this->id);
+			$this->data['project'] = $this->project->get_by_id($this->data['task']->project_id);
+			$this->data['group'] = $this->group->get_by_id($this->data['project']->group_id);
+		}
 		$this->data['taskStatus'] = getTaskStatusList();
 	}
 
@@ -36,9 +41,12 @@ class Task extends MY_Controller
 			case "pick_up_task":
 				$this->pick_up_task();
 				break;
-				case "reopen_task":
-					$this->reopen_task();
-					break;
+			case "reopen_task":
+				$this->reopen_task();
+				break;
+			case "edit_save":
+				$this->edit_save();
+			break;
 			default:
 				$this->home();
 				break;
@@ -70,20 +78,28 @@ class Task extends MY_Controller
 
 		$this->data['taskAssignedToMe'] = $taskAssignedToMe;
 		$this->data['taskMonitoredByMe'] = $taskMonitoredByMe;
-		$this->data['title']	= "Trang Chủ";
+		$this->data['title']	= "My Tasks";
 		$this->data['subview'] = 'dashboard/task/V_my_tasks';
 		$this->load->view('dashboard/_main_page', $this->data);
 	}
 
-	protected function task_detail(){
-		if($this->id)
-		{
-			$this->data['task'] = $this->task->get_by_id($this->id);
+	protected function task_detail()
+	{
+		if ($this->id) {
 			$this->data['assigner'] = $this->user->get_by_id($this->data['task']->assigner);
 			$this->data['assignee'] = $this->user->get_by_id($this->data['task']->assignee);
 			$this->data['report_to'] = $this->user->get_by_id($this->data['task']->report_to);
 			$this->data['task_comments'] = $this->task_comment->get_by_task($this->id);
-			$this->data['title']	= "Trang Chủ";
+			if ($this->data['task_comments']) {
+				foreach ($this->data['task_comments'] as $key => $value) {
+					$taskCommentFiles = $this->task_comment->get_task_comment_file($value->id);
+					if ($taskCommentFiles) {
+						$this->data['task_comments'][$key]->files = $taskCommentFiles;
+					}
+				}
+			}
+			$this->data['projectUsers'] = $this->user->get_users_by_project($this->data['task']->project_id);
+			$this->data['title']	= "Task Detail";
 			$this->data['subview'] = 'dashboard/task/V_task_detail';
 			$this->load->view('dashboard/_main_page', $this->data);
 		} else {
@@ -91,78 +107,127 @@ class Task extends MY_Controller
 		}
 	}
 
+	public function edit_save()
+	{
+		$taskData = $this->input->post();
+		if ($taskData) {
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+			$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+			$result = array(
+				"link" => site_url('dashboard/task?act=task_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token),
+				'code' => 200
+			);
+		} else {
+			$result = array("message" => "Error Saving");
+		}
+		echo json_encode($result);
+	}
+
 	protected function change_task_done()
 	{
-		$taskData['status'] = getTaskStatusId('Done');
-		$taskData['last_update'] = getCurrentMySqlDate();
-		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
-		if ($taskId) {
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
-			return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+		if ($this->id) {
+			$taskData['status'] = getTaskStatusId('Done');
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			if ($taskId) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+			} else {
+				$_SESSION['system_msg'] = messageDialog('div', 'error', 'Error Saving');
+			}
 		} else {
-			echo 'Có lỗi khi Save';
+			redirect(site_url("dashboard"));
 		}
 	}
 
 	protected function change_task_not_done()
 	{
-		$taskData['status'] = getTaskStatusId('Working On');
-		$taskData['last_update'] = getCurrentMySqlDate();
-		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
-		if ($taskId) {
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
-			return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+		if ($this->id) {
+			$taskData['status'] = getTaskStatusId('Working On');
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			if ($taskId) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+			} else {
+				echo 'Có lỗi khi Save';
+			}
 		} else {
-			echo 'Có lỗi khi Save';
+			redirect(site_url("dashboard"));
 		}
 	}
 
 	protected function confirm_task()
 	{
-		$taskData['status'] = getTaskStatusId('Confirmed');
-		$taskData['last_update'] = getCurrentMySqlDate();
-		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
-		if ($taskId) {
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
-			return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+		if ($this->id) {
+			$taskData['status'] = getTaskStatusId('Confirmed');
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			if ($taskId) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+			} else {
+				echo 'Có lỗi khi Save';
+			}
 		} else {
-			echo 'Có lỗi khi Save';
+			redirect(site_url("dashboard"));
 		}
 	}
 
 	protected function pick_up_task()
 	{
-		if($_GET['task'] == 'new'){
-			$taskData['status'] = 1;
-		}
-		$taskData['assignee'] = $this->data['infoLog']->id;
-		$taskData['last_update'] = getCurrentMySqlDate();
-		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
-		if ($taskId) {
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
-			return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+		if ($this->id) {
+			if ($_GET['task'] == 'new') {
+				$taskData['status'] = 1;
+			}
+			$taskData['assignee'] = $this->data['infoLog']->id;
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			if ($taskId) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+			} else {
+				echo 'Có lỗi khi Save';
+			}
 		} else {
-			echo 'Có lỗi khi Save';
+			redirect(site_url("dashboard"));
 		}
 	}
 
 	protected function reopen_task()
 	{
-		$taskData['status'] = getTaskStatusId('Working On');
-		$taskData['last_update'] = getCurrentMySqlDate();
-		$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
-		if ($taskId) {
-			$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
-			return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+		if ($this->id) {
+			$taskData['status'] = getTaskStatusId('Working On');
+			$taskData['last_update'] = getCurrentMySqlDate();
+			$taskId = $this->default_model->set_table('task')->sets($taskData)->setPrimary($this->id)->save();
+			if ($taskId) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $taskId);
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $taskId . '&token=' . $this->data['infoLog']->token));
+			} else {
+				echo 'Có lỗi khi Save';
+			}
 		} else {
-			echo 'Có lỗi khi Save';
+			redirect(site_url("dashboard"));
 		}
 	}
 
 	protected function new_comment_save()
 	{
 		$commentData = $this->input->post();
-		if ($commentData) {
+		if ($commentData['description'] != '' && $_FILES['image']['tmp_name'] != '') {
+			$commentData['task_id'] = $this->id;
 			$commentData['created_by'] = $this->data['infoLog']->id;
 			$commentData['created_at'] = getCurrentMySqlDate();
 			$newCommentId = $this->default_model->set_table('task_comment')->sets($commentData)->setPrimary(false)->save();
@@ -175,12 +240,18 @@ class Task extends MY_Controller
 				$result = false;
 			}
 			if ($result) {
+				$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['project']->id)->save();
+				$this->default_model->set_table('group')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->data['group']->id)->save();
 				$this->default_model->set_table('task')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
-				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved task id#: ' . $this->id);
+				$_SESSION['system_msg'] = messageDialog('div', 'success', 'Saved Comment');
 				return redirect(site_url('dashboard/task?act=task_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token));
 			} else {
-				echo 'Có lỗi khi Save';
+				$_SESSION['system_msg'] = messageDialog('div', 'error', 'Error Saving Comment');
+				return redirect(site_url('dashboard/task?act=task_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token));
 			}
+		} else {
+			$_SESSION['system_msg'] = messageDialog('div', 'error', 'Please input something');
+			return redirect(site_url('dashboard/task?act=task_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token));
 		}
 	}
 
@@ -193,7 +264,7 @@ class Task extends MY_Controller
 			$_FILES['file']['tmp_name'] = $imageFiles['tmp_name'][$key];
 			$_FILES['file']['error'] = $imageFiles['error'][$key];
 			$_FILES['file']['size'] = $imageFiles['size'][$key];
-			$image['file'] = do_upload('avatar', 'file');
+			$image['file'] = do_upload('comment', 'file');
 			$image['comment_id'] = $newCommentId;
 			$imageSaved[] = $this->M_myweb->set_table('task_comment_file')->sets($image)->setPrimary(false)->save();
 		}

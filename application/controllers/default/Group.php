@@ -46,6 +46,9 @@ class Group extends MY_Controller
 			case "new_announcement_save":
 				$this->new_announcement_save();
 				break;
+			case "edit_save":
+				$this->edit_save();
+				break;
 			default:
 				$this->home();
 				break;
@@ -55,7 +58,7 @@ class Group extends MY_Controller
 	public function home()
 	{
 
-		$this->data['title']	= "Trang Chủ";
+		$this->data['title']	= "My Groups";
 		$this->data['subview'] = 'dashboard/group/V_group_index';
 		$this->load->view('dashboard/_main_page', $this->data);
 	}
@@ -74,7 +77,7 @@ class Group extends MY_Controller
 					$this->data['projects'][$key]->possibleUsers = $projectPossibleUsers;
 				}
 			}
-			$this->data['title']	= "Trang Chủ";
+			$this->data['title']	= "Group Detail";
 			$this->data['subview'] = 'dashboard/group/V_group_detail';
 			$this->load->view('dashboard/_main_page', $this->data);
 		} else {
@@ -158,11 +161,27 @@ class Group extends MY_Controller
 						'groupName' =>	$newGroupData['name']
 					);
 				} else {
-					$result = array("message" => "Có Lỗi Khi Tạo Nhóm");
+					$result = array("message" => "Error Saving");
 				}
 			}
 		} else {
-			$result = array("message" => "Có Lỗi Khi Tạo Nhóm");
+			$result = array("message" => "Error Saving");
+		}
+		echo json_encode($result);
+	}
+
+	public function edit_save()
+	{
+		$groupData = $this->input->post();
+		if ($groupData) {
+			$groupData['last_update'] = getCurrentMySqlDate();
+			$this->default_model->set_table('group')->sets($groupData)->setPrimary($this->id)->save();
+			$result = array(
+				"link" => site_url('dashboard/group?act=group_detail&id=' . $this->id . '&token=' . $this->data['infoLog']->token),
+				'code' => 200
+			);
+		} else {
+			$result = array("message" => "Error Saving");
 		}
 		echo json_encode($result);
 	}

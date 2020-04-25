@@ -1,3 +1,4 @@
+
 <div class="card__header">
     <div class="card__header-title">
         <h3>Overview</h3>
@@ -96,7 +97,7 @@
             <?php if ($recentProjects) : ?>
                 <?php foreach ($recentProjects as $recentProject) : ?>
                     <div class="item">
-                                <div class="icon-projects" data-width="40" data-height="40" data-bg="#EA4E9D"></div>
+                                <div class="icon-projects" data-width="40" data-height="40" data-bg="#00FFFF"></div>
                                 <div class="text">
                                     <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id='.$recentProject->id.'&token='.$infoLog->token);?>"><?php echo !empty($recentProject->name) ? $recentProject->name : "Không Tên"; ?> (ID#: <?php echo $recentProject->id;?>)</a></div>
                                     <div class="history">Last Updated : <?php echo $recentProject->last_update; ?></div>

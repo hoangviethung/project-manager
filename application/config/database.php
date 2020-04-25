@@ -74,7 +74,7 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 //Thông tin host cpanel
-// 'hostname' => '45.252.249.11',
+// 'hostname' => '45.252.248.16',
 // 'username' => 'vikizonc',
 // 'password' => 'crE810vuC3',
 // 'database' => 'vikizonc_gazebo',

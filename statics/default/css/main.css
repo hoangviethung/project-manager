@@ -146,7 +146,7 @@ header .avatar-header {
 header .avatar-header figure{
     border: 3px solid #fff;
     border-radius: 10px;
-    background: #494e53;
+    background: #fff;
     width: 42px;
     height: 42px
 }
@@ -2238,7 +2238,7 @@ template {
 }
 
 
-#block-invite-group , #block-new-group, #block-announcement, #block-new-project, .block-invite-project,#block-new-task {
+#block-invite-group , #block-new-group, #block-announcement, #block-new-project, .block-invite-project,#block-new-task,.block-form-ajax {
     border-radius: 10px;
     padding: 30px;
     width: 100%
@@ -2249,17 +2249,18 @@ template {
 #block-announcement p, #block-announcement h2,
 #block-new-project p,#block-new-project h2,
 .block-invite-project p,.block-invite-project h2,
-#block-new-task p,#block-new-task h2   {
+#block-new-task p,#block-new-task h2,
+.block-form-ajax p,.block-form-ajax h2{
     color: #646f79
 }
 
-#block-invite-group h2, #block-new-group h2, #block-announcement h2, #block-new-project h2,.block-invite-project h2,#block-new-task h2 {
+#block-invite-group h2, #block-new-group h2, #block-announcement h2, #block-new-project h2,.block-invite-project h2,#block-new-task h2,.block-form-ajax h2 {
     border-bottom: 1px solid #dad9d9;
     padding-bottom: 15px;
     font-size: 18px
 }
 
-#block-invite-group p, #block-new-group p,#block-announcement p,#block-new-project p,.block-invite-project p,#block-new-task p {
+#block-invite-group p, #block-new-group p,#block-announcement p,#block-new-project p,.block-invite-project p,#block-new-task p,.block-form-ajax p {
     margin-top: 10px;
     font-size: 14px
 }
@@ -2269,7 +2270,8 @@ template {
 #block-announcement .block-form,
 #block-new-project .block-form,
 .block-invite-project .block-form,
-#block-new-task .block-form {
+#block-new-task .block-form,
+.block-form-ajax .block-form {
     margin-top: 25px
 }
 
@@ -2278,7 +2280,8 @@ template {
 #block-announcement .form-group,
 #block-new-project .form-group,
 .block-invite-project .form-group,
-#block-new-task .form-group {
+#block-new-task .form-group,
+.block-form-ajax .form-group {
     margin-bottom: 15px
 }
 
@@ -2287,7 +2290,8 @@ template {
 #block-announcement .form-group label,
 #block-new-project .form-group label,
 .block-invite-project .form-group label,
-#block-new-task .form-group label {
+#block-new-task .form-group label,
+.block-form-ajax .form-group label {
     margin-bottom: 12px;
     width: 100%;
     color: #646f79;
@@ -2300,7 +2304,8 @@ template {
 #block-announcement .form-group textarea,
 #block-new-project .form-group textarea,
 .block-invite-project .form-group textarea,
-#block-new-task .form-group textarea{
+#block-new-task .form-group textarea,
+.block-form-ajax .form-group textarea{
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;
@@ -2315,7 +2320,8 @@ template {
 #block-announcement .form-group input,
 #block-new-project .form-group input,
 .block-invite-project .form-group input,
-#block-new-task .form-group input {
+#block-new-task .form-group input,
+.block-form-ajax .form-group input {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;
@@ -2329,7 +2335,8 @@ template {
 #block-announcement .form-group select,
 #block-new-project .form-group select,
 .block-invite-project .form-group select,
-#block-new-task .form-group select {
+#block-new-task .form-group select,
+.block-form-ajax .form-group select {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;
@@ -2342,7 +2349,8 @@ template {
 #block-announcement .form-group select option,
 #block-new-project .form-group select option,
 .block-invite-project .form-group select option,
-#block-new-task .form-group select option {
+#block-new-task .form-group select option,
+.block-form-ajax .form-group select option {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding: 10px;
@@ -2488,7 +2496,7 @@ body.disabled {
     -ms-flex-align: center;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    /* display: flex; */
     align-items: center
 }
 
@@ -2660,7 +2668,8 @@ body.disabled {
 }
 
 .card .block-list-recent .list-item .text {
-    margin-left: 15px
+    margin-left: 15px;
+    width:100%;
 }
 
 .card .block-list-recent .list-item .history,
