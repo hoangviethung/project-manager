@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Trang Sức La Jew</title>
+	<title>Gazeboo Admin</title>
 
 	<!-- Vendor stylesheet files. REQUIRED -->
 	<!-- BEGIN: Vendor  -->
@@ -75,12 +75,7 @@
 						<div class="navbar-header-left b-r">
 							<!--begin logo-->
 							<a class="logo" href="<?php echo site_url();?>">
-								<span class="logo-xs visible-xs">
-									<img src="statics/directory/img/logo_xs.svg" alt="logo-xs">
-								</span>
-								<span class="logo-lg hidden-xs">
-									<img src="statics/directory/img/logo_lg.svg" alt="logo-lg">
-								</span>
+								<small style='margin:auto;font-size:16px;'>GAZEBOO</small>
 							</a>
 							<!--end logo-->
 						</div>
@@ -95,7 +90,7 @@
 								<i class="fa fa-fw fa-bars"></i>
 							</a>
 
-							<form class="navbar-form hidden-xs b-r">
+							<!-- <form class="navbar-form hidden-xs b-r">
 								<div class="icon-after-input">
 									<input type="text" class="form-control" placeholder="Search">
 									<div class="icon">
@@ -104,23 +99,20 @@
 										</a>
 									</div>
 								</div>
-							</form>
+							</form> -->
 
 						</nav>
 
 						<ul class="nav navbar-header-nav m-l-a">
 							<li class="dropdown b-l">
 								<a class="dropdown-toggle profile-pic" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<img class="img-circle" src="<?php echo $avatar?>" alt="<?php echo $infoLog->userName?>">
-									<b class="hidden-xs hidden-sm"><?php echo $infoLog->userName?></b>
+									<img class="img-circle" src="<?php echo base_url('assets/public/avatar/').$avatar;?>" alt="<?php echo $infoLog->displayName?>">
+									<b class="hidden-xs hidden-sm"><?php echo $infoLog->displayName?></b>
 								</a>
 								<ul class="dropdown-menu animated flipInY pull-right">
-									<li>
-										<a href="<?php echo site_url('admin/user?act=profile&id='.$infoLog->logid."&token=".$infoLog->token)?>">Profile</a>
-									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="<?php echo site_url('admin/logout')?>">
+										<a href="<?php echo site_url('dashboard/logout')?>">
 											<i class="fa fa-fw fa-sign-out"></i>
 											Logout
 										</a>

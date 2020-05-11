@@ -26,7 +26,6 @@ class Task_comment_model extends CI_model
 	public function get_task_comments($where = false)
 	{
 		$this->db->select('	task_comment.*,
-							user.user_name,
 							user.display_name,
 							user.email');
 		$this->db->where('task_comment.is_active',1);
@@ -61,7 +60,6 @@ class Task_comment_model extends CI_model
 	public function get_by_id($task_id)
 	{
 		$this->db->select('	task_comment.*,
-							user.user_name,
 							user.display_name,
 							user.email,
 							user.avatar');
@@ -80,7 +78,6 @@ class Task_comment_model extends CI_model
 	public function get_by_task($task_id)
 	{
 		$this->db->select('	task_comment.*,
-							user.user_name,
 							user.display_name,
 							user.email,
 							user.avatar');
@@ -99,7 +96,6 @@ class Task_comment_model extends CI_model
 	public function get_task_comment_by_user($userId,$where = false)
 	{
 		$this->db->select('	task_comment.*,
-							user.user_name,
 							user.display_name,
 							user.email,
 							user.avatar');

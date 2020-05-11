@@ -45,6 +45,11 @@
                                         <?php endif; ?>
                                     </div>
                                     <small><?php echo $user->display_name; ?></small>
+                                    <input type="hidden" name='project_detail_id' value='<?php echo $user->project_detail_id; ?>'>
+                                    <input type="hidden" name='member_id' value='<?php echo $user->id; ?>'>
+                                    <?php if(($project->leader == $infoLog->id || $group->leader == $infoLog->id) && $project->leader != $user->id):?>
+                                    <button class="delete-project-member-button" data-url="<?php echo site_url('dashboard/project?act=delete_member&id=' . $project->id . '&token=' . $infoLog->token); ?>">X</button>
+                                    <?php endif;?>
                                 </div>
                             <?php endforeach; ?>
                             <?php
@@ -58,7 +63,7 @@
                             }
                             ?>
                             <?php if ($project->leader == $infoLog->id || $hasPermission) : ?>
-                                <div class="add-user" data-fancybox data-src="#block-invite-project">Invite +</div>
+                                <div class="add-user" data-fancybox data-src="#block-invite-project">Invite</div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -68,7 +73,6 @@
         <div class="d-n">
             <div class='block-invite-project' id="block-invite-project" data-max-width="900">
                 <h2>Invite people to this Project</h2>
-                <p>Your teammates will be added to your teamtest.</p>
                 <div class="block-form">
                     <form action="#">
                         <div class="form-group form-group-email">

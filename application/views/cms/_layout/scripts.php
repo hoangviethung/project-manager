@@ -55,14 +55,14 @@ var myChart_7 = new Chart(last_7, {
     data: {
 		labels: chart_labels_7,
         datasets: [{
-            label: 'Số Đơn Hàng',
+            label: 'Members Registered',
             data: ChartData_7,
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Thống Kê Đơn Hàng trong 7 ngày'
+            text: 'Members Registered in 7 days'
         }
     }
 });
@@ -80,14 +80,14 @@ var myChart_30 = new Chart(last_30, {
     data: {
 		labels: chart_labels,
         datasets: [{
-            label: 'Số Đơn Hàng',
+            label: 'Members Registered',
             data: ChartData_30,
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Thống Kê Đơn Hàng trong 30 ngày'
+            text: 'Members Registered in 30 days'
         }
     }
 });
@@ -104,14 +104,14 @@ var myChart_year = new Chart(last_year, {
     data: {
 		labels: chart_labels_year,
         datasets: [{
-            label: 'Số Đơn Hàng',
+            label: 'Members Registered',
             data: ChartData_year
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Thống Kê Đơn Hàng Trong 12 tháng'
+            text: 'Members Registered in a year'
         }
     }
 });

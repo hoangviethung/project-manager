@@ -25,10 +25,8 @@ class Task_model extends CI_model
 	}
 	public function get_tasks($where = false)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id','left');
-		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->order_by('task.last_update','desc');
 		if($where)
 		{
@@ -44,10 +42,8 @@ class Task_model extends CI_model
 
 	public function get_by_id($task_id)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id','left');
-		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->where('task.id',$task_id);
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->row();
@@ -60,10 +56,8 @@ class Task_model extends CI_model
 
 	public function get_tasks_by_user($userId,$where = false)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id','left');
-		$this->db->join('task_status','task_status.id = task.category_id','left');
 		$this->db->group_start();
 		$this->db->or_where('task.assignee',$userId);
 		$this->db->or_where('task.assigner',$userId);
@@ -83,10 +77,8 @@ class Task_model extends CI_model
 
 	public function get_recent_tasks_by_user($userId)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id','left');
-		$this->db->join('task_status','task_status.id = task.status','left');
 		$this->db->where('(task.assignee ='.$userId.' or task.assigner ='.$userId.' or task.report_to ='.$userId.')');
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->result();
@@ -99,10 +91,8 @@ class Task_model extends CI_model
 
 	public function get_recent_tasks_by_assignee($userId)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
 		$this->db->where('task.assignee',$userId);
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->result();
@@ -115,10 +105,8 @@ class Task_model extends CI_model
 
 	public function get_recent_tasks_by_report_to($userId)
 	{
-		$this->db->select('task.*,task_category.name as category_name,task_status.name as status_name');
+		$this->db->select('task.*');
 		$this->db->where('task.is_active',1);
-		$this->db->join('task_category','task_category.id = task.category_id');
-		$this->db->join('task_status','task_status.id = task.category_id');
 		$this->db->or_where('task.report_to',$userId);
 		$this->db->order_by('task.last_update','desc');
 		$result= $this->db->get('task')->result();

@@ -7,14 +7,14 @@
         <div class="dashhead bg-white">
             <div class="dashhead-titles">
                 <h6 class="dashhead-subtitle">
-                    La Jew / Thống Kê
+                Admin Statistics 
                 </h6>
-                <h3 class="dashhead-title">Thống Kê</h3>
+                <h3 class="dashhead-title">Statistics </h3>
             </div>
 
             <div class="dashhead-toolbar">
                 <div class="dashhead-toolbar-item">
-                    Sản phẩm / Thống Kê
+                     Statistics 
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <div class="box-body">
                     <div class="row m-b-20">
                         <div class="col-md-12">
-                            <h3 class=m-b-15>Thống Kê Sản Phẩm</h3>
+                            <h3 class=m-b-15>Member Statistics</h3>
                         </div>
                         <div class="col-md-3">
                             <div class="product-report-item">
@@ -41,10 +41,10 @@
                                         <i class="fas fa-shopping-cart"></i>
                                     </div>
                                     <h3 class="product-report-title">
-                                        Tổng Sản Phẩm
+                                        Active Groups
                                     </h3>
                                     <p class="product-report-info" id='all-product-count'>
-                                        <?php echo count($products); ?>
+                                    <?php echo $activeGroups?count($activeGroups):0; ?>
                                     </p>
                                 </div>
                             </div>
@@ -56,10 +56,10 @@
                                         <i class="fas fa-cart-plus"></i>
                                     </div>
                                     <h3 class="product-report-title">
-                                        Sản Phẩm Mới
+                                        Active Members
                                     </h3>
                                     <p class="product-report-info" id='new-product-count'>
-                                        <?php echo count($new_products); ?>
+                                        <?php echo $activeMembers?count($activeMembers):0; ?>
                                     </p>
                                 </div>
                             </div>
@@ -71,10 +71,25 @@
                                         <i class="fas fa-cart-arrow-down"></i>
                                     </div>
                                     <h3 class="product-report-title">
-                                        Sản Phẩm Sale
+                                        Registered but never log in
                                     </h3>
                                     <p class="product-report-info" id='sale-product-count'>
-                                        <?php echo count($sale_products); ?>
+                                        <?php echo $inActiveMembers?count($inActiveMembers):'0'; ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="product-report-item">
+                                <div class="product-report-wrap">
+                                    <div class="product-report-icon bg-danger">
+                                        <i class="fas fa-cart-arrow-down"></i>
+                                    </div>
+                                    <h3 class="product-report-title">
+                                        Total Members Registered
+                                    </h3>
+                                    <p class="product-report-info" id='sale-product-count'>
+                                        <?php echo $totalMembers?count($totalMembers):0; ?>
                                     </p>
                                 </div>
                             </div>
@@ -83,18 +98,18 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Thống Kê Đơn Hàng</h3>
+                            <h3>Member Chart</h3>
                         </div>
                         <div class="col-md-12">
                             <ul class="nav nav-tabs chart_tab" id="myTab" role="tablist">
                                 <li class="nav-item active">
-                                    <a class="nav-link active" id="last_7_days-tab" data-toggle="tab" href="#last_7_days" role="tab" aria-controls="last_7_days" aria-selected="true">7 ngày gần nhất</a>
+                                    <a class="nav-link active" id="last_7_days-tab" data-toggle="tab" href="#last_7_days" role="tab" aria-controls="last_7_days" aria-selected="true">7 days</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="last_30_days-tab" data-toggle="tab" href="#last_30_days" role="tab" aria-controls="last_30_days" aria-selected="false">30 ngày gần nhất</a>
+                                    <a class="nav-link" id="last_30_days-tab" data-toggle="tab" href="#last_30_days" role="tab" aria-controls="last_30_days" aria-selected="false">30 days</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="last_year-tab" data-toggle="tab" href="#last_year_tab" role="tab" aria-controls="last_year_tab" aria-selected="false">12 tháng gần nhất</a>
+                                    <a class="nav-link" id="last_year-tab" data-toggle="tab" href="#last_year_tab" role="tab" aria-controls="last_year_tab" aria-selected="false">12 months</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
@@ -167,7 +182,8 @@
             run();
         }
 
-        animateValue("all-product-count", 0, <?php echo count($products); ?>, 1000);
-        animateValue("new-product-count", 0, <?php echo count($new_products); ?>, 1000);
-        animateValue("sale-product-count", 0, <?php echo count($sale_products); ?>, 1000);
+        animateValue("all-product-count", 0, <?php echo $activeGroups?count($activeGroups):0; ?>, 1000);
+        animateValue("new-product-count", 0, <?php echo $activeMembers?count($activeMembers):0; ?>, 1000);
+        animateValue("sale-product-count", 0, <?php echo $inActiveMembers?count($inActiveMembers):'0'; ?>, 1000);
+        animateValue("total-members", 0, <?php echo $totalMembers?count($totalMembers):0; ?>, 1000);
     </script>

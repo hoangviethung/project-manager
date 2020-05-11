@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('default/Project_model','project');
 		$this->load->model('default/Task_model','task');
 		$this->systemDefault();
-		$exception_uris = array('dashboard/logout','dashboard/login','index','','confirm_group_invite');
+		$exception_uris = array('dashboard/logout','dashboard/login','index','','confirm_group_invite','forget_password','register_save');
 		if (in_array(uri_string(), $exception_uris) == FALSE) {
 			if (check_logged_in() == FALSE) {
 				redirect(site_url());
@@ -60,8 +60,8 @@ class MY_Controller extends CI_Controller {
 				'protocol' => 'smtp',
 				'smtp_host' => 'ssl://smtp.gmail.com',
 				'smtp_port' => '465',
-				'smtp_user' => '', // change email account it to yours
-				'smtp_pass' => '', // change password it to yours
+				'smtp_user' => 'minhtan17071991', // change email account it to yours
+				'smtp_pass' => 'Rasengan17', // change password it to yours
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => "\r\n",
@@ -73,12 +73,12 @@ class MY_Controller extends CI_Controller {
 
 			// prepare email
 			$this->email
-				->from('', '') // Params: $senderEmail, $senderName
+				->from('minhtan17071991@gmail.com', 'Gazeboo') // Params: $senderEmail, $senderName
 				->to("$receiver")
 				->subject($subject)
 				->message($message)
-				->set_mailtype('html');
-				// ->set_newline("\r\n");
+				->set_mailtype('html')
+				->set_newline("\r\n");
 
         // send email
 			if (!$this->email->send())

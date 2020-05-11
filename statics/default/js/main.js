@@ -182,12 +182,11 @@
                     nextEl: ".thumbnail-image .swiper-button-next",
                     prevEl: ".thumbnail-image .swiper-button-prev"
                 }
-            }), l(), $("#block-login button").on("click", (function(e) {
+            }), l(), $("#block-form-login button").on("click", (function(e) {
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
-                    i = $(this).attr("data-redirect"),
-                    a = $('#block-login .block-form input[name="email"]').val(),
-                    n = $('#block-login .block-form input[name="password"]').val();
+                    a = $('#block-form-login input[name="email"]').val(),
+                    n = $('#block-form-login input[name="password"]').val();
                 $.ajax({
                     type: "POST",
                     url: t,
@@ -197,7 +196,37 @@
                     },
                     success: function(e) {
                         e = JSON.parse(e)
-                        '200' == e.code ? ($.fancybox.close(), window.location.href=i) : alert(e.message)
+                        '200' == e.code ? ($.fancybox.close(), window.location.href=e.link) : alert(e.message)
+                    }
+                })
+            })), $("#block-form-forget button").on("click", (function(e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-form-forget input[name="email"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        email: a
+                    },
+                    success: function(e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? ($.fancybox.close(), alert(e.message)) : alert(e.message)
+                    }
+                })
+            })),$("#block-register button").on("click", (function(e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    a = $('#block-register .block-form input[name="email"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        email: a
+                    },
+                    success: function(e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? ($.fancybox.close(), alert(e.message)) : alert(e.message)
                     }
                 })
             })), $("#block-new-group button").on("click", (function (e) {
@@ -214,7 +243,7 @@
                     },
                     success: function (e) {
                         e = JSON.parse(e)
-                        '200' == e.code ? (alert('Tạo thành công nhóm: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                        '200' == e.code ? (alert('Group Created: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })),$("#block-new-project button").on("click", (function (e) {
@@ -231,7 +260,7 @@
                     },
                     success: function (e) {
                         e = JSON.parse(e)
-                        '200' == e.code ? (alert('Tạo thành công dự án: '+e.projectName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                        '200' == e.code ? (alert('Project Created: '+e.projectName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })),$("#block-new-task button").on("click", (function (e) {
@@ -355,6 +384,22 @@
                     success: function (e) {
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
+                    }
+                })
+            })), $(".delete-project-member-button").on("click", (function (e) {
+                e.preventDefault();
+                var t = $(this).attr("data-url"),
+                    uid = $(this).parent().find('input[name="member_id"]').val(),
+                    a = $(this).parent().find('input[name="project_detail_id"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: t,
+                    data: {
+                        project_detail_id: a
+                    },
+                    success: function (e) {
+                        e = JSON.parse(e)
+                        '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })),$(".item-click-dropdown").on("click", (function() {

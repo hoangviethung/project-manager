@@ -2153,18 +2153,21 @@ template {
     pointer-events: visible
 }
 
-#block-login {
+#block-login,#block-register {
     padding: 55px 180px;
     width: 100%
 }
-
-#block-login h2 {
+#block-register{
+    padding: 55px 180px;
+    width: 100%
+}
+#block-login h2,#block-register h2 {
     margin-bottom: 42px;
     font-size: 50px;
     text-align: center
 }
 
-#block-login .or {
+#block-login .or,#block-register .or {
     position: relative;
     margin: 35px 0;
     background: #fff;
@@ -2199,16 +2202,16 @@ template {
     content: ''
 }
 
-#block-login .form-group {
+#block-login .form-group,#block-register .form-group {
     margin-bottom: 28px
 }
 
-#block-login .form-group label {
+#block-login .form-group label,#block-register .form-group label {
     margin-bottom: 11px;
     width: 100%
 }
 
-#block-login .form-group input {
+#block-login .form-group input,#block-register .form-group input{
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .16);
     box-shadow: 0 0 5px rgba(0, 0, 0, .16);
     border: 1px solid #b9bdc1;
@@ -2494,9 +2497,8 @@ body.disabled {
 .list-user {
     -webkit-box-align: center;
     -ms-flex-align: center;
-    display: -webkit-box;
     display: -ms-flexbox;
-    /* display: flex; */
+    display: flex;
     align-items: center
 }
 

@@ -1,4 +1,3 @@
-
 <div class="card__header">
     <div class="card__header-title">
         <h3>Overview</h3>
@@ -13,15 +12,32 @@
             <!-- ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS-->
             <?php if ($recentTasks) : ?>
                 <?php foreach ($recentTasks as $recentTask) : ?>
-                <a href="<?php echo site_url('dashboard/task?act=task_detail&id='.$recentTask->id.'&token='.$infoLog->token);?>">
-                <div class="item">
-                        <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div>
-                        <div class="text">
-                        <div class="name"><?php echo $recentTask->name .' (ID#: '.$recentTask->id.')';?></div>
-                            <div class="history">Changed Recently: <?php echo $recentTask->last_update;?></div>
+                    <a href="<?php echo site_url('dashboard/task?act=task_detail&id=' . $recentTask->id . '&token=' . $infoLog->token); ?>">
+                        <div class="item">
+                            <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div>
+                            <div class="text">
+                                <div class="name"><?php echo $recentTask->name . ' (ID#: ' . $recentTask->id . ')'; ?></div>
+                                <div class="history">Changed Recently: <?php echo $recentTask->last_update; ?></div>
+                            </div>
+                            <small class='mb-0'>
+                                <?php switch ($recentTask->status) {
+                                    case 0:
+                                        echo "<button class='btn btn-warning text-light status-button'>New</button>";
+                                        break;
+                                    case 1:
+                                        echo "<button class='btn btn-primary text-light status-button'>Working On</button>";
+                                        break;
+                                    case 2:
+                                        echo "<button class='btn btn-info text-light status-button'>Done</button>";
+                                        break;
+                                    case 3:
+                                        echo "<button class='btn btn-success text-light status-button'>Confirmed</button>";
+                                        break;
+                                }
+                                ?>
+                            </small>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 <?php endforeach; ?>
             <?php else : ?>
                 No recent tasks
@@ -97,13 +113,13 @@
             <?php if ($recentProjects) : ?>
                 <?php foreach ($recentProjects as $recentProject) : ?>
                     <div class="item">
-                                <div class="icon-projects" data-width="40" data-height="40" data-bg="#00FFFF"></div>
-                                <div class="text">
-                                    <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id='.$recentProject->id.'&token='.$infoLog->token);?>"><?php echo !empty($recentProject->name) ? $recentProject->name : "Không Tên"; ?> (ID#: <?php echo $recentProject->id;?>)</a></div>
-                                    <div class="history">Last Updated : <?php echo $recentProject->last_update; ?></div>
-                                </div>
+                        <div class="icon-projects" data-width="40" data-height="40" data-bg="#00FFFF"></div>
+                        <div class="text">
+                            <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id=' . $recentProject->id . '&token=' . $infoLog->token); ?>"><?php echo !empty($recentProject->name) ? $recentProject->name : "Không Tên"; ?> (ID#: <?php echo $recentProject->id; ?>)</a></div>
+                            <div class="history">Last Updated : <?php echo $recentProject->last_update; ?></div>
+                        </div>
 
-                            </div>
+                    </div>
                 <?php endforeach; ?>
             <?php else : ?>
                 No recent project
@@ -116,11 +132,11 @@
         <div class="block-form">
             <form action="#">
                 <div class="form-group">
-                    <label>Tên Nhóm</label>
+                    <label>Group name</label>
                     <input type="text" name="name" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label>Mô Tả</label>
+                    <label>Description</label>
                     <textarea name="description" rows="4"></textarea>
                 </div>
                 <div class="form-group">

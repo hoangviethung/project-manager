@@ -68,7 +68,7 @@ $route['dashboard'] = 'dashboard';
 $route['confirm_group_invite'] = 'main/confirm_group_invite';
 
 //Register
-$route['register'] = 'main/registerView';
+$route['forget_password'] = 'main/forgetPassword';
 $route['register_save'] = 'main/registerSave';
 
 

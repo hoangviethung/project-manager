@@ -24,7 +24,7 @@ unset($_SESSION['system_msg']);
     <!-- Nút thao tác Task khác -->
     <?php if ($task->status == 1) : ?>
         <a class='btn btn-danger float-right text-light font-weight-bold status-button' href='<?php echo site_url('dashboard/task?act=change_task_done&id=' . $task->id . '&token=' . $infoLog->token); ?>'>Done</a>
-    <?php elseif ($task->status == 2 && $task->report_to != $infoLog->id) : ?>
+    <?php elseif ($task->status == 2 && $task->report_to == $infoLog->id) : ?>
         <a class='btn btn-success float-right text-light font-weight-bold status-button' href='<?php echo site_url('dashboard/task?act=confirm_task&id=' . $task->id . '&token=' . $infoLog->token); ?>'>Confirm Task</a>
         <a class='btn btn-danger float-right text-light font-weight-bold status-button' href='<?php echo site_url('dashboard/task?act=change_task_not_done&id=' . $task->id . '&token=' . $infoLog->token); ?>'>Not Done</a>
     <?php elseif ($task->status == 3) : ?>

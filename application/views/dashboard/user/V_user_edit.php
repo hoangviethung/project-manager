@@ -20,18 +20,13 @@ unset($_SESSION['system_msg']);
                 </div>
             </div>
             <div class="title">User Information</div>
-
-            <div class="form-group required">
-                <label class="control-label">User Name</label>
-                <input id="content" class="form-control" name="user_name" value="<?php echo $infoLog->userName; ?>">
-            </div>
             <div class="form-group required">
                 <label class="control-label">Display Name</label>
-                <input id="content" class="form-control" name="display_name" value="<?php echo $infoLog->displayName; ?>">
+                <input type='text' class="form-control" name="display_name" value="<?php echo $infoLog->displayName; ?>">
             </div>
             <div class="form-group required">
-                <label class="control-label">Email</label>
-                <input id="content" class="form-control" name="email" value="<?php echo $infoLog->email; ?>">
+                <label class="control-label">Password (leave blank if no change)</label>
+                <input type='password' class="form-control" name="password">
             </div>
             <!-- <script>
             var editor = CKEDITOR.replace('description', {

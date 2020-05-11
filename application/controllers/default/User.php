@@ -37,13 +37,18 @@ class User extends MY_Controller
 			}else{
 				$userData['avatar'] = $this->data['infoLog']->avatar;
 			}
+			if($userData['password']=="")
+			{
+				unset($userData['password']);
+			}else{
+				$userData['password'] = hashPass($userData['password']);
+			}
 			$this->default_model->set_table('user')->sets($userData)->setPrimary($this->data['infoLog']->id)->save();
 			$session = array(
 				'id'			=> $this->data['infoLog']->id,
 				'logged_in'		=>	true,
-				'userName'		=>	$userData['user_name'],
 				'displayName'	=>	$userData['display_name'],
-				'email'			=>	$userData['email'],
+				'email'			=>	$this->data['infoLog']->email,
 				'avatar'		=>	$userData['avatar'],
 				'token'			=>	$this->data['infoLog']->token
 			);

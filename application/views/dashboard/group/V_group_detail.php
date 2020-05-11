@@ -1,6 +1,6 @@
 <div class="card__header">
     <div class="card__header-title">
-        <h3><?php echo $group->name; ?> <br>(ID#: <?php echo $group->id;?>)</h3>
+        <h3><?php echo $group->name; ?> <br>(ID#: <?php echo $group->id; ?>)</h3>
     </div>
     <div class="card__header-actions"><a class="link" href="<?php echo site_url('dashboard/group'); ?>">See all my Groups</a></div>
 </div>
@@ -47,7 +47,7 @@
                                     <p><?php echo $user->display_name; ?></p>
                                 </div>
                             <?php endforeach; ?>
-                            <div class="add-user" data-fancybox data-src="#block-invite-group">Invite +</div>
+                            <div class="add-user" data-fancybox data-src="#block-invite-group">Invite</div>
                         </div>
                     </div>
                 </div>
@@ -57,11 +57,11 @@
                 <div class="list-item">
                     <?php if ($announcements) : ?>
                         <?php foreach ($announcements as $announcement) : ?>
-                            <p class='float-right'><small><?php echo $announcement->created_at;?></small></p>
+                            <p class='float-right'><small><?php echo $announcement->created_at; ?></small></p>
                             <div class="name">
-                            <h5 class="lcl lcl-1"><?php echo $announcement->title;?></h5>
+                                <h5 class="lcl lcl-1"><?php echo $announcement->title; ?></h5>
                             </div>
-                            <?php echo $announcement->description;?>
+                            <?php echo $announcement->description; ?>
                             <hr>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -74,15 +74,15 @@
                     <div class="block-form anouncement-form">
                         <form action="#">
                             <div class="form-group">
-                            <label id="description">New Announcement</label>
+                                <label id="description">New Announcement</label>
                                 <input name="title" placeholder="Anouncement's title"></input>
                             </div>
                             <div class="form-group">
-                                
+
                                 <textarea name="description" placeholder="Content"></textarea>
                             </div>
                             <div class="form-group ta-r">
-                                <button class="btn btn-send-invite" data-url="<?php echo site_url('dashboard/group?act=new_announcement_save&id='.$group->id.'&token='.$infoLog->token);?>">Send</button>
+                                <button class="btn btn-send-invite" data-url="<?php echo site_url('dashboard/group?act=new_announcement_save&id=' . $group->id . '&token=' . $infoLog->token); ?>">Send</button>
                             </div>
                         </form>
                     </div>
@@ -120,11 +120,11 @@
                             <div class="item">
                                 <div class="icon-projects" data-width="40" data-height="40" data-bg="#EA4E9D"></div>
                                 <div class="text">
-                                    <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id='.$project->id.'&token='.$infoLog->token);?>"><?php echo !empty($project->name) ? $project->name : "Không Tên"; ?> (ID#: <?php echo $project->id;?>)</a></div>
+                                    <div class="name"><a href="<?php echo site_url('dashboard/project?act=project_detail&id=' . $project->id . '&token=' . $infoLog->token); ?>"><?php echo !empty($project->name) ? $project->name : "Không Tên"; ?> (ID#: <?php echo $project->id; ?>)</a></div>
                                     <div class="history">Last Updated : <?php echo $project->last_update; ?></div>
                                 </div>
                                 <div class="list-user list-user-project ml-at">
-                                <span><?php echo $project->display_name;?></span>
+                                    <span><?php echo $project->display_name; ?></span>
                                     <!-- USER CÓ ẢNH-->
                                     <div class="user">
                                         <?php if (empty($project->avatar)) : ?>
@@ -133,20 +133,18 @@
                                             <div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>public/avatar/<?php echo $project->avatar; ?>" alt=""></div>
                                         <?php endif; ?>
                                     </div>
-                                    <?php 
-                                    if($project->projectUsers)
-                                    {
+                                    <?php
+                                    if ($project->projectUsers) {
                                         $hasPermission = false;
-                                        foreach($project->projectUsers as $projectUser){
-                                            if($projectUser->id == $infoLog->id)
-                                            {
+                                        foreach ($project->projectUsers as $projectUser) {
+                                            if ($projectUser->id == $infoLog->id) {
                                                 $hasPermission = true;
                                             }
                                         }
                                     }
                                     ?>
                                     <?php if ($project->leader == $infoLog->id || $hasPermission) : ?>
-                                        <div class="add-user" data-fancybox data-src="#block-invite-project-<?php echo $project->id; ?>">Invite +</div>
+                                        <div class="add-user" data-fancybox data-src="#block-invite-project-<?php echo $project->id; ?>">Invite</div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -175,7 +173,7 @@
                                                                     </figure>
                                                                 <?php endif; ?>
                                                                 <span>
-                                                                <?php echo $possibleUser->display_name; ?> - <?php echo $possibleUser->email; ?></span>
+                                                                    <?php echo $possibleUser->display_name; ?> - <?php echo $possibleUser->email; ?></span>
                                                                 <input type="hidden" class="project-possible-user-email" value="<?php echo $possibleUser->email; ?>">
                                                             </div>
                                                         <?php endforeach; ?>
@@ -185,7 +183,7 @@
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group ta-r">
-                                                <button class="btn btn-send-invite" redirect-url="<?php echo $_SERVER['QUERY_STRING']? site_url($this->uri->uri_string()).'?'.$_SERVER['QUERY_STRING'] : $url;?>" data-url="<?php echo site_url('dashboard/project?act=add_member&id=' . $project->id . '&token=' . $infoLog->token); ?>">Send</button>
+                                                <button class="btn btn-send-invite" redirect-url="<?php echo $_SERVER['QUERY_STRING'] ? site_url($this->uri->uri_string()) . '?' . $_SERVER['QUERY_STRING'] : $url; ?>" data-url="<?php echo site_url('dashboard/project?act=add_member&id=' . $project->id . '&token=' . $infoLog->token); ?>">Send</button>
                                             </div>
                                         </form>
                                     </div>
@@ -209,14 +207,31 @@
                 <div class="title">Recent Tasks</div>
                 <div class="list-item">
                     <!-- ĐIỀU ĐỦ CÁC THÔNG SỐ VÀO ICON PROJECT JS SẼ TỰ ĐỘNG SET CSS-->
-                    <?php if (isset($tasks)&&$tasks) : ?>
+                    <?php if (isset($tasks) && $tasks) : ?>
                         <?php foreach ($tasks as $task) : ?>
                             <div class="item">
                                 <!-- <div class="icon-projects" data-width="20" data-height="20" data-bg="#EA4E9D"></div> -->
                                 <div class="text">
-                                    <div class="name"><?php echo $task->name;?> (ID#: <?php echo $task->id;?>)</div>
-                                    <div class="history">Changed Recently: <?php echo $task->last_update;?></div>
+                                    <div class="name"><?php echo $task->name; ?> (ID#: <?php echo $task->id; ?>)</div>
+                                    <div class="history">Changed Recently: <?php echo $task->last_update; ?></div>
                                 </div>
+                                <small class='mb-0'> 
+                                        <?php switch ($task->status) {
+                                            case 0:
+                                                echo "<button class='btn btn-warning text-light status-button'>New</button>";
+                                                break;
+                                            case 1:
+                                                echo "<button class='btn btn-primary text-light status-button'>Working On</button>";
+                                                break;
+                                            case 2:
+                                                echo "<button class='btn btn-info text-light status-button'>Done</button>";
+                                                break;
+                                            case 3:
+                                                echo "<button class='btn btn-success text-light status-button'>Confirmed</button>";
+                                                break;
+                                        }
+                                        ?>
+                                    </small>
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -252,17 +267,17 @@
     <div class="block-form-ajax" id="block-edit-group" data-max-width="900">
         <h2>Edit Info</h2>
         <div class="block-form">
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" name="name" placeholder="" value="<?php echo $group->name;?>">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" rows="4"><?php echo $group->description;?></textarea>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/group?act=edit_save&id=' . $group->id . '&token=' . $infoLog->token); ?>">Edit Group</button>
-                </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="name" placeholder="" value="<?php echo $group->name; ?>">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="4"><?php echo $group->description; ?></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-view-more w-100" data-url="<?php echo site_url('dashboard/group?act=edit_save&id=' . $group->id . '&token=' . $infoLog->token); ?>">Edit Group</button>
+            </div>
         </div>
     </div>
 </div>

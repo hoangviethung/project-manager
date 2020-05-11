@@ -59,10 +59,11 @@ class User_model extends CI_model
 
 	public function get_users_by_project($projectId)
 	{
-		$this->db->select('user.*,project_detail.project_id,project_detail.is_lead,project_detail.date_added');
+		$this->db->select('user.*,project_detail.id as project_detail_id,project_detail.project_id,project_detail.is_lead,project_detail.date_added');
 		$this->db->join('project_detail','project_detail.user_id = user.id');
 		$this->db->where('project_detail.project_id',$projectId);
 		$this->db->where('user.is_active',1);
+		$this->db->where('project_detail.is_active',1);
 		$result= $this->db->get('user')->result();
 		if($result)
 		{
@@ -73,11 +74,12 @@ class User_model extends CI_model
 
 	public function get_1_user_by_project($projectId,$userId)
 	{
-		$this->db->select('user.*,project_detail.project_id,project_detail.is_lead,project_detail.date_added');
+		$this->db->select('user.*,project_detail.id as project_detail_id,project_detail.project_id,project_detail.is_lead,project_detail.date_added');
 		$this->db->join('project_detail','project_detail.user_id = user.id');
 		$this->db->where('project_detail.project_id',$projectId);
 		$this->db->where('project_detail.user_id',$userId);
 		$this->db->where('user.is_active',1);
+		$this->db->where('project_detail.is_active',1);
 		$result= $this->db->get('user')->row();
 		if($result)
 		{

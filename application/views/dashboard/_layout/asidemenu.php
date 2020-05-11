@@ -36,27 +36,24 @@
 			</ul>
 		</div>
 		<?php if (uri_string() == 'dashboard/project' && isset($_GET['id'])) : ?>
-			<div class="aside-item">
+			<!-- <div class="aside-item">
 				<div class="name active">
 					<div class="icon"><img class="svg" src="<?php echo base_url('assets/'); ?>icons/group-user.svg" alt="" srcset=""></div>
 					<h5 class="lcl lcl-1">Project Team</h5>
 				</div>
 				<div class="list-link list-user">
-					<!-- USER CÓ ẢNH-->
 					<div class="user">
 						<div class="avatar ov-h"><img class="ofcv" src="<?php echo base_url('assets/'); ?>images/admin/user-default.png" alt=""></div>
 					</div>
-					<!-- USER TRỐNG-->
 					<div class="user">
 						<div class="avatar ov-h"></div>
 					</div>
-					<!-- USER TRỐNG-->
 					<div class="user">
 						<div class="avatar ov-h"></div>
 					</div>
 					<div class="add-user" data-fancybox data-src="#block-invite">Invite +</div>
 				</div>
-			</div>
+			</div> -->
 		<?php endif; ?>
 	</div>
 </aside>

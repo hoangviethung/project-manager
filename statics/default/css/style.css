@@ -190,4 +190,28 @@ img.imgFile{height:auto;;max-width: 100%;}
     border-right: 5px solid transparent;
     border-top: 5px solid #17a2b8;
 }
+.user{
+    position: relative;
+}
+/* .user:hover .delete-project-member-button{
+    display:block;
+    opacity: 1;
+    transition: ease-in-out 1s;
+} */
+.delete-project-member-button{
+    border-radius : 50%;
+    border:none;
+    background:white;
+    color:red;
+    position: absolute;
+    border:solid 1px red;
+    top:-10px;
+    right:-10px;
+    font-size: 10px;
+    height:18px;
+    width:18px;
+    text-align: center;
+    padding:0;
+    font-weight: 600;
+}
 

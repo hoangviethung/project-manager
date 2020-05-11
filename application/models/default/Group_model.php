@@ -25,7 +25,7 @@ class Group_model extends CI_model
 	}
 	public function get_groups($where = false)
 	{
-		$this->db->select("group.*,user.user_name,user.email,user.display_name,user.avatar");
+		$this->db->select("group.*,user.email,user.display_name,user.avatar");
 		$this->db->where('group.is_active',1);
 		$this->db->join('user','user.id = group.leader');
 		if($where)
@@ -42,7 +42,7 @@ class Group_model extends CI_model
 
 	public function get_by_id($id)
 	{
-		$this->db->select("group.*,user.user_name,user.email,user.display_name,user.avatar");
+		$this->db->select("group.*,user.email,user.display_name,user.avatar");
 		$this->db->where('group.is_active',1);
 		$this->db->where('group.id',$id);
 		$this->db->join('user','user.id = group.leader');
@@ -60,6 +60,7 @@ class Group_model extends CI_model
 		$this->db->where('group.is_active',1);
 		$this->db->join('group_detail','group_detail.group_id = group.id');
 		$this->db->where('group_detail.user_id',$userId);
+		$this->db->where('group_detail.is_confirmed',1);
 		$this->db->order_by("group.last_update","desc");
 		if($where)
 		{

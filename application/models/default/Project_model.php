@@ -25,7 +25,7 @@ class Project_model extends CI_model
 	}
 	public function get_projects($where = false)
 	{
-		$this->db->select("project.*,user.user_name,user.email,user.display_name,user.avatar");
+		$this->db->select("project.*,user.email,user.display_name,user.avatar");
 		$this->db->where('project.is_active',1);
 		$this->db->join('user','user.id = project.leader');
 		$this->db->order_by('project.last_update','desc');
@@ -43,7 +43,7 @@ class Project_model extends CI_model
 
 	public function get_by_id($id)
 	{
-		$this->db->select("project.*,user.user_name,user.email,user.display_name,user.avatar");
+		$this->db->select("project.*,user.email,user.display_name,user.avatar");
 		$this->db->where('project.is_active',1);
 		$this->db->where('project.id',$id);
 		$this->db->join('user','user.id = project.leader');
@@ -61,6 +61,7 @@ class Project_model extends CI_model
 		$this->db->where('project.is_active',1);
 		$this->db->join('project_detail','project_detail.project_id = project.id');
 		$this->db->where('project_detail.user_id',$userId);
+		$this->db->where('project_detail.is_active',1);
 		if($where)
 		{
 			$this->where_condition($where);
@@ -79,6 +80,7 @@ class Project_model extends CI_model
 		$this->db->where('project.is_active',1);
 		$this->db->join('project_detail','project_detail.project_id = project.id');
 		$this->db->where('project_detail.user_id',$userId);
+		$this->db->where('project_detail.is_active',1);
 		$this->db->group_by('project_detail.project_id'); 
 		$this->db->order_by('project.last_update','desc');
 		$result= $this->db->get('project')->result();

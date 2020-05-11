@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('statics/default/'); ?>css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url('statics/default/'); ?>css/dropzone.css">
 	<script src="<?php echo base_url('filemanager') ?>/ckeditor/ckeditor.js"></script>
-
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/'); ?>favicon.ico">
 </head>
 
 <body data-layout="admin">
@@ -89,8 +89,8 @@
 						<div class="logout"><a class="btn btn-logout" href="<?php echo site_url('dashboard/logout'); ?>">Logout</a></div>
 					</div>
 					<div class="list-link">
-						<div class="name-list">TÀI KHOẢN</div>
-						<div class="link"><a href="<?php echo site_url('dashboard/user'); ?>">Thông tin tài khoản</a></div>
+						<div class="name-list">Account</div>
+						<div class="link"><a href="<?php echo site_url('dashboard/user'); ?>">Account Information</a></div>
 						<!-- <div class="link"><a href="#">Sửa thông tin tài khoản</a></div>
 							<div class="link"><a href="#">Cài đặt</a></div>
 							<div class="name-list">THIẾT LẬP</div>
