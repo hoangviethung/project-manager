@@ -119,7 +119,7 @@
 <script src="<?php echo base_url('statics/default/'); ?>js/jquery.mb.YTPlayer.min.js"></script>
 <script src="<?php echo site_url('statics/default/swiper/dist/js/swiper.min.js'); ?>"></script>
 <script src="<?php echo base_url('statics/default/'); ?>toastr/build/toastr.min.js"></script>
-
+<script src="<?php echo base_url('statics/default/'); ?>js/jquery.blockUI.js"></script>
 
 <script src="<?php echo base_url('statics/default/'); ?>js/main.js"></script>
 <script>

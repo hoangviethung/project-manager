@@ -182,20 +182,28 @@ class Project extends MY_Controller
 			echo json_encode($result);
 			return false;
 		}
+		$result = array();
+		$result['message'] = '';
 		$projectDetailId = $this->input->post('project_detail_id');
 		$memberId = $this->input->post('member_id');
 		$check = $this->default_model->set_table('project_detail')->sets(array('is_active'=>0))->setPrimary($projectDetailId)->save();
-		$taskAssignedTo = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'assignee'=>$memberId,'is_active'=>1))->gets();
-		$taskReportTo = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'report_to'=>$memberId,'is_active'=>1))->gets();
-		$taskAssign = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'assigner'=>$memberId,'is_active'=>1))->gets();
-		foreach($taskAssignedTo as $a){
-			$this->default_model->set_table('task')->sets(array('assignee'=>0))->setPrimary($a->id)->save();
+		$taskAssignedTo = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'assignee'=>$memberId,'is_active'=>1))->setPrimary(false)->gets();
+		$taskReportTo = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'report_to'=>$memberId,'is_active'=>1))->setPrimary(false)->gets();
+		$taskAssign = $this->default_model->set_table('task')->sets(array('project_id'=>$this->id,'assigner'=>$memberId,'is_active'=>1))->setPrimary(false)->gets();
+		if($taskAssignedTo){
+			foreach($taskAssignedTo as $a){
+				$this->default_model->set_table('task')->sets(array('assignee'=>0))->setPrimary($a->id)->save();
+			}
 		}
-		foreach($taskReportTo as $b){
-			$this->default_model->set_table('task')->sets(array('report_to'=>$this->data['project']->leader))->setPrimary($b->id)->save();
+		if($taskReportTo){
+			foreach($taskReportTo as $b){
+				$this->default_model->set_table('task')->sets(array('report_to'=>$this->data['project']->leader))->setPrimary($b->id)->save();
+			}
 		}
-		foreach($taskAssign as $c){
-			$this->default_model->set_table('task')->sets(array('assigner'=>$this->data['project']->leader))->setPrimary($c->id)->save();
+		if($taskAssign){
+			foreach($taskAssign as $c){
+				$this->default_model->set_table('task')->sets(array('assigner'=>$this->data['project']->leader))->setPrimary($c->id)->save();
+			}
 		}
 		if($projectDetailId == $check)
 		{
@@ -263,10 +271,8 @@ class Project extends MY_Controller
 								);
 								$newMemberSave = $this->default_model->set_table('project_detail')->sets($newMemberData)->setPrimary(false)->save();
 								$this->default_model->set_table('project')->sets(array('last_update' => getCurrentMySqlDate()))->setPrimary($this->id)->save();
-								$result = array(
-									'code' => '200');
-									$result['message'] = $result['message'].' Add user successfully : '.$email.';';
-								
+								$result['code'] = 200;
+								$result['message'] = $result['message'].' Add user successfully : '.$email.';';
 							}
 						}
 					} else {

@@ -2505,7 +2505,7 @@ body.disabled {
 .list-user .user {
     margin-right: 10px;
     border-radius: 50%;
-    background: #646f79
+    background:none;
 }
 
 .list-user .user:last-child {

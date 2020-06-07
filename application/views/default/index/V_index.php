@@ -292,6 +292,7 @@
 	</div>
 	<script type="text/javascript" src="<?php echo base_url('statics/default/'); ?>js/core.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('statics/default/'); ?>js/main.js"></script>
+	<script type="text/javascript" src="<?php echo base_url('statics/default/'); ?>js/jquery.blockUI.js"></script>
 </body>
 
 </html>

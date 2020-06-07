@@ -183,6 +183,7 @@
                     prevEl: ".thumbnail-image .swiper-button-prev"
                 }
             }), l(), $("#block-form-login button").on("click", (function(e) {
+                $.blockUI();
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
                     a = $('#block-form-login input[name="email"]').val(),
@@ -195,11 +196,13 @@
                         password: n
                     },
                     success: function(e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? ($.fancybox.close(), window.location.href=e.link) : alert(e.message)
                     }
                 })
             })), $("#block-form-forget button").on("click", (function(e) {
+                $.blockUI();
                 e.preventDefault();
                 var t = $(this).attr("data-url"),
                     a = $('#block-form-forget input[name="email"]').val();
@@ -210,12 +213,14 @@
                         email: a
                     },
                     success: function(e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? ($.fancybox.close(), alert(e.message)) : alert(e.message)
                     }
                 })
             })),$("#block-register button").on("click", (function(e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-register .block-form input[name="email"]').val();
                 $.ajax({
@@ -225,12 +230,14 @@
                         email: a
                     },
                     success: function(e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? ($.fancybox.close(), alert(e.message)) : alert(e.message)
                     }
                 })
             })), $("#block-new-group button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-new-group .block-form input[name="name"]').val(),
                     n = $('#block-new-group .block-form textarea[name="description"]').val();
@@ -242,12 +249,14 @@
                         description: n
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Group Created: '+e.groupName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })),$("#block-new-project button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-new-project .block-form input[name="name"]').val(),
                     n = $('#block-new-project .block-form textarea[name="description"]').val();
@@ -259,12 +268,14 @@
                         description: n
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Project Created: '+e.projectName),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })),$("#block-new-task button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     name = $('#block-new-task .block-form input[name="name"]').val(),
                     description = $('#block-new-task .block-form textarea[name="description"]').val(),
@@ -280,12 +291,14 @@
                         assignee : assignee
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-invite-group button").on("click", (function(e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     i = $("#block-invite-group .block-form input#email").val(),
                     a = $("#block-invite-group .block-form input#project").val();
@@ -296,12 +309,14 @@
                         email: i,
                     },
                     success: function(e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         alert(e.message)
                     }
                 })
             })), $(".block-invite-project button").on("click", (function(e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     n = $(this).attr("redirect-url"),
                     i = $(this).parents('.block-form').find('.form-group-email').find('textarea[name="email"]').val();
@@ -312,12 +327,14 @@
                         email: i,
                     },
                     success: function(e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = n) : alert(e.message)
                     }
                 })
             })),  $("#block-announcement button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-announcement .block-form input[name="title"]').val(),
                     n = $('#block-announcement .block-form textarea[name="description"]').val();
@@ -329,12 +346,14 @@
                         description: n
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Announcement Published'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-edit-group button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-edit-group .block-form input[name="name"]').val(),
                     n = $('#block-edit-group .block-form textarea[name="description"]').val();
@@ -346,12 +365,14 @@
                         description: n
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-edit-project button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-edit-project .block-form input[name="name"]').val(),
                     n = $('#block-edit-project .block-form textarea[name="description"]').val();
@@ -363,12 +384,14 @@
                         description: n
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $("#block-edit-task button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     a = $('#block-edit-task .block-form input[name="name"]').val(),
                     n = $('#block-edit-task .block-form textarea[name="description"]').val(),
@@ -382,12 +405,14 @@
                         assignee : m
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert('Info Saved'),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
                 })
             })), $(".delete-project-member-button").on("click", (function (e) {
                 e.preventDefault();
+                $.blockUI();
                 var t = $(this).attr("data-url"),
                     uid = $(this).parent().find('input[name="member_id"]').val(),
                     a = $(this).parent().find('input[name="project_detail_id"]').val();
@@ -398,6 +423,7 @@
                         project_detail_id: a
                     },
                     success: function (e) {
+                        $.unblockUI();
                         e = JSON.parse(e)
                         '200' == e.code ? (alert(e.message),$.fancybox.close(),window.location.href = e.link) : alert(e.message)
                     }
